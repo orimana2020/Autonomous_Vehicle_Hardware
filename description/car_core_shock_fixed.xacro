@@ -306,7 +306,7 @@
     <axis xyz="0 0 1"/>
     <parent link="base_link"/>
     <child link="back_left_wheel_shock"/>
-    <origin rpy="0 0 0" xyz="0 ${rear_wheelbase_width/2+0.1}  ${-shock_travel/2}"/>
+    <origin rpy="0 0 0" xyz="0 ${rear_wheelbase_width/2}  ${-shock_travel/2}"/>
   </joint>
 
   <joint name="back_left_wheel_joint" type="continuous">
@@ -319,7 +319,7 @@
   <joint name="back_right_shock_joint" type="fixed">
     <parent link="base_link"/>
     <child link="back_right_wheel_shock"/>
-    <origin rpy="0 0 0" xyz="0 ${-rear_wheelbase_width/2+0.1} ${-shock_travel/2}"/>
+    <origin rpy="0 0 0" xyz="0 ${-rear_wheelbase_width/2} ${-shock_travel/2}"/>
   </joint>
 
   <joint name="back_right_wheel_joint" type="continuous">
@@ -334,14 +334,14 @@
   <joint name="front_right_shock_joint" type="fixed">
     <parent link="base_link"/>
     <child link="front_right_wheel_shock"/>
-    <origin rpy="0 0 0" xyz="${wheelbase_length} ${-front_wheelbase_width/2+0.1} ${-shock_travel/2}"/>
+    <origin rpy="0 0 0" xyz="${wheelbase_length} ${-front_wheelbase_width/2} ${-shock_travel/2}"/>
   </joint>
 
 
   <joint name="front_left_shock_joint" type="fixed">
     <parent link="base_link"/>
     <child link="front_left_wheel_shock"/>
-    <origin rpy="0 0 0" xyz="${wheelbase_length} ${front_wheelbase_width/2+0.1}  ${-shock_travel/2}"/>
+    <origin rpy="0 0 0" xyz="${wheelbase_length} ${front_wheelbase_width/2}  ${-shock_travel/2}"/>
   </joint>
 
 
