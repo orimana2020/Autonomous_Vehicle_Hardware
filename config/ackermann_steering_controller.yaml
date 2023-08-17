@@ -1,0 +1,34 @@
+controller_manager:
+  ros__parameters:
+    update_rate: 30
+    # use_sim_time: true
+
+    diff_cont:
+      # type: diff_drive_controller/DiffDriveController
+      type: ackermann_steering_controller/AckermannSteeringController
+
+
+    joint_broad:
+      type: joint_state_broadcaster/JointStateBroadcaster
+
+
+diff_cont:
+  ros__parameters:
+    reference_timeout: 2.0
+    front_steering: true
+    open_loop: false
+    velocity_rolling_window_size: 10
+    position_feedback: true
+    use_stamped_vel: false
+    rear_wheels_names: [back_right_wheel_joint, back_left_wheel_joint]
+    front_wheels_names: [front_right_wheel_steer_joint, front_left_wheel_steer_joint]
+    wheelbase: 0.3429
+    front_wheel_track: 0.25
+    rear_wheel_track: 0.25
+    front_wheels_radius: 0.056
+    rear_wheels_radius: 0.056
+    max_steering_speed: 1.5707963267948966
+    max_steering_angle: 0.42
+    base_frame_id: base_link
+    # odom_frame_id: odomeee
+    enable_odom_tf: true
