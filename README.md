@@ -5,7 +5,7 @@ first install ros2,
 
 sudo apt install ros-humble-xacro ros-humble-joint-state-publisher-gui
 
-git clone -b humble https://github.com/joshnewans/my_package.git
+git clone -b humble https://github.com/joshnewans/rc_car.git
 
 sudo apt install ros-humble-rplidar-ros
 
@@ -27,14 +27,14 @@ sudo apt install ros-humble-twist-mux
 
 ----------Launch sim--------------
 terminal 1: gazebo
-ros2 launch my_package launch_sim.launch.py world:=src/my_package/worlds/obstacles.world
+ros2 launch rc_car launch_sim.launch.py world:=src/rc_car/worlds/obstacles.world
 
 terminal 2: rviz
-ros2 run rviz2 rviz2 -d src/my_package/config/main.rviz --ros-args -p use_sim_time:=true
+ros2 run rviz2 rviz2 -d src/rc_car/config/main.rviz --ros-args -p use_sim_time:=true
 
 terminal 3: slam toolbox (mapping)
-ros2 launch my_package online_async_launch.py use_sim_time:=true
+ros2 launch rc_car online_async_launch.py use_sim_time:=true
 add map to rviz
 
 terminal 4: nav2 stack
-ros2 launch my_package navigation_launch.py use_sim_time:=true# my_ackermann
+ros2 launch rc_car navigation_launch.py use_sim_time:=true# my_ackermann

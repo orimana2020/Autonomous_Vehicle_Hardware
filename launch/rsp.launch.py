@@ -17,13 +17,14 @@ def generate_launch_description():
     use_ros2_control = LaunchConfiguration('use_ros2_control')
 
     # Process the URDF file
-    pkg_path = os.path.join(get_package_share_directory('my_package'))
+    pkg_path = os.path.join(get_package_share_directory('rc_car'))
     xacro_file = os.path.join(pkg_path,'description','robot.urdf.xacro')
     # robot_description_config = xacro.process_file(xacro_file).toxml()
     robot_description_config = Command(['xacro ', xacro_file, ' use_ros2_control:=', use_ros2_control, ' sim_mode:=', use_sim_time])
     
     # Create a robot_state_publisher node
     params = {'robot_description': robot_description_config, 'use_sim_time': use_sim_time}
+    # params = {'robot_description': robot_description_config}
 
     node_robot_state_publisher = Node(
         package='robot_state_publisher',
@@ -31,7 +32,6 @@ def generate_launch_description():
         output='screen',
         parameters=[params]
     )
-
 
     # Launch!
     return LaunchDescription([
@@ -44,5 +44,5 @@ def generate_launch_description():
             default_value='true',
             description='Use ros2_control if true'),
 
-        node_robot_state_publisher
+        node_robot_state_publisher,
     ])

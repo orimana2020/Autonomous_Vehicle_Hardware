@@ -4,8 +4,7 @@
     <!-- <xacro:arg name="use_ros2_control" default="true"/>
     <xacro:arg name="sim_mode" default="true"/> -->
 
-    <!-- <xacro:include filename="robot_core.xacro" /> -->
-    <xacro:include filename="car_core_shock_fixed.xacro" />
+    <xacro:include filename="Traxxes.xacro" />
 
     <xacro:include filename="ros2_control.xacro" />
 
