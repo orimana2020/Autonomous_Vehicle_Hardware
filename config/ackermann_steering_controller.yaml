@@ -19,9 +19,9 @@ diff_cont:
     open_loop: false
     velocity_rolling_window_size: 10
     position_feedback: true
-    use_stamped_vel: false
+    use_stamped_vel: true
     rear_wheels_names: [back_right_wheel_joint, back_left_wheel_joint]
-    front_wheels_names: [front_right_wheel_steer_joint, front_left_wheel_steer_joint]
+    front_wheels_names: [front_right_steer_joint, front_left_steer_joint]
     wheelbase: 0.3429
     front_wheel_track: 0.25
     rear_wheel_track: 0.25

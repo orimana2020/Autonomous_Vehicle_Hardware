@@ -1,10 +1,13 @@
 <?xml version="1.0"?>
 <robot xmlns:xacro="http://www.ros.org/wiki/xacro">
 
+  <xacro:include filename="inertial_macros.xacro" />
+
+  <!-- car geometry -->
   <xacro:arg name="wheel_diameter" default="0.112" />
   <xacro:property name="wheel_radius" value="${$(arg wheel_diameter)/2}" />
   <xacro:property name="wheel_width" value="0.047" />
-  <xacro:property name="wheel_friction" value="1.5" />
+  <xacro:property name="wheel_friction" value="1.0" />
   <xacro:property name="wheelbase_length" value="0.3429" />
   <xacro:property name="wheelbase_width" value="0.25" />
   <xacro:property name="chassis_width" value="0.18" />
@@ -15,40 +18,24 @@
   <xacro:property name="chassis_elevation" value="-0.01" />
   <xacro:property name="chassis_mass" value="${total_mass-4*wheel_mass}" />
 
-
-  <xacro:include filename="inertial_macros.xacro" />
+  <!-- Steering params -->
+  <xacro:property name="steering_velocity" value="2.0" />
+  <xacro:property name="steering_upper_limit" value="1.0" />
+  <xacro:property name="steering_lower_limit" value="-1.0" />
+  <xacro:property name="steering_effort" value="2.0" />
 
 
   <!-- Base link -->
+  <link name="base_link"></link>
+  <link name="base_footprint"></link>
 
-  <link name="base_link">
-    <visual>
-      <geometry>
-        <cylinder length="0.01" radius="0.01" />
-      </geometry>
-      <material name="black">
-        <color rgba="0 0 0 1" />
-      </material>
-    </visual>
-    <collision>
-      <geometry>
-        <cylinder length="0.01" radius="0.01" />
-      </geometry>
-    </collision>
-    <xacro:inertial_cylinder mass="0.1" radius="0.01" length="0.01">
-      <origin xyz="0 0 0" rpy="0 0 0" />
-    </xacro:inertial_cylinder>
-  </link>
-
-  <!-- <joint name="base_link_joint" type="fixed">
+  <joint name="base_link_joint" type="fixed">
     <parent link="base_link" />
     <child link="base_footprint" />
     <origin rpy="0 0 0" xyz="0 0 0" />
-  </joint> -->
-
+  </joint>
 
   <!-- Chassis -->
-
   <link name="chassis_link">
     <visual>
       <geometry>
@@ -151,25 +138,6 @@
     </xacro:inertial_cylinder>
   </link>
 
-  <link name="dummy_left">
-    <visual>
-      <geometry>
-        <cylinder length="0.01" radius="0.01" />
-      </geometry>
-      <material name="black">
-        <color rgba="0 0 0 1" />
-      </material>
-    </visual>
-    <collision>
-      <geometry>
-        <cylinder length="0.01" radius="0.01" />
-      </geometry>
-    </collision>
-    <xacro:inertial_cylinder mass="0.1" radius="0.01" length="0.01">
-      <origin xyz="0 0 0" rpy="0 0 0" />
-    </xacro:inertial_cylinder>
-  </link>
-
   <link name="front_left_wheel">
     <visual>
       <geometry>
@@ -189,30 +157,102 @@
     </xacro:inertial_cylinder>
   </link>
 
-
   <joint name="front_left_steer_joint" type="revolute">
     <parent link="chassis_link" />
     <child link="front_left_steer" />
     <axis xyz="0 0 1" />
     <origin rpy="0 0 0" xyz="${wheelbase_length/2} ${wheelbase_width/2} 0" />
-    <limit lower="-0.7" upper="0.7" effort="0.5" velocity="1.0" />
-    <!-- <dynamics damping="0.0" friction="0.2"/> -->
-  </joint>
-
-  <joint name="dummy_left_joint" type="fixed">
-    <parent link="front_left_steer" />
-    <child link="dummy_left" />
-    <origin rpy="0 0 0" xyz="0 0 0" />
+    <limit lower="${steering_lower_limit}" upper="${steering_upper_limit}"
+      effort="${steering_effort}" velocity="${steering_velocity}" />
+    <dynamics damping="0.0" friction="0.2" />
   </joint>
 
   <joint name="front_left_wheel_joint" type="continuous">
-    <parent link="dummy_left" />
+    <parent link="front_left_steer" />
     <child link="front_left_wheel" />
     <axis xyz="0 0 1" />
     <origin rpy="${-pi/2} 0 0" xyz="0 0 0" />
   </joint>
 
 
+  <!-- front_right -->
+  <link name="front_right_steer">
+    <visual>
+      <geometry>
+        <cylinder length="0.01" radius="0.01" />
+      </geometry>
+      <material name="black">
+        <color rgba="0 0 0 1" />
+      </material>
+    </visual>
+    <collision>
+      <geometry>
+        <cylinder length="0.01" radius="0.01" />
+      </geometry>
+    </collision>
+    <xacro:inertial_cylinder mass="0.1" radius="0.01" length="0.01">
+      <origin xyz="0 0 0" rpy="0 0 0" />
+    </xacro:inertial_cylinder>
+  </link>
+
+  <link name="front_right_wheel">
+    <visual>
+      <geometry>
+        <cylinder length="${wheel_width}" radius="${wheel_radius}" />
+      </geometry>
+      <material name="black">
+        <color rgba="0 0 0 1" />
+      </material>
+    </visual>
+    <collision>
+      <geometry>
+        <cylinder length="${wheel_width}" radius="${wheel_radius}" />
+      </geometry>
+    </collision>
+    <xacro:inertial_cylinder mass="${wheel_mass}" radius="${wheel_radius}" length="${wheel_width}">
+      <origin xyz="0 0 0" rpy="0 0 0" />
+    </xacro:inertial_cylinder>
+  </link>
+
+  <joint name="front_right_steer_joint" type="revolute">
+    <parent link="chassis_link" />
+    <child link="front_right_steer" />
+    <axis xyz="0 0 1" />
+    <origin rpy="0 0 0" xyz="${wheelbase_length/2} -${wheelbase_width/2} 0" />
+    <limit lower="${steering_lower_limit}" upper="${steering_upper_limit}"
+      effort="${steering_effort}" velocity="${steering_velocity}" />
+    <dynamics damping="0.0" friction="0.2" />
+  </joint>
+
+  <joint name="front_right_right_joint" type="continuous">
+    <parent link="front_right_steer" />
+    <child link="front_right_wheel" />
+    <axis xyz="0 0 1" />
+    <origin rpy="${-pi/2} 0 0" xyz="0 0 0" />
+  </joint>
+
+
+  <!-- Gazebo interface -->
+  <gazebo reference="front_left_wheel">
+    <mu1 value="${wheel_friction}" />
+    <mu2 value="${wheel_friction}" />
+    <material>Gazebo/DarkGrey</material>
+  </gazebo>
+  <gazebo reference="front_right_wheel">
+    <mu1 value="${wheel_friction}" />
+    <mu2 value="${wheel_friction}" />
+    <material>Gazebo/DarkGrey</material>
+  </gazebo>
+  <gazebo reference="back_left_wheel">
+    <mu1 value="${wheel_friction}" />
+    <mu2 value="${wheel_friction}" />
+    <material>Gazebo/DarkGrey</material>
+  </gazebo>
+  <gazebo reference="back_right_wheel">
+    <mu1 value="${wheel_friction}" />
+    <mu2 value="${wheel_friction}" />
+    <material>Gazebo/DarkGrey</material>
+  </gazebo>
 
 
 </robot>

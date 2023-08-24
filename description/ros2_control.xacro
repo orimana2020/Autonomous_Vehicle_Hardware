@@ -96,7 +96,7 @@
             <state_interface name="velocity"/>
             <state_interface name="position"/> 
         </joint>
-        <joint name="front_right_wheel_steer_joint">
+        <joint name="front_right_steer_joint">
             <command_interface name="position">
                 <param name="min">-1</param>
                 <param name="max">1</param>
@@ -104,7 +104,7 @@
             <!-- <state_interface name="velocity"/>  -->
             <state_interface name="position"/> 
         </joint>
-        <joint name="front_left_wheel_steer_joint">
+        <joint name="front_left_steer_joint">
             <command_interface name="position">
                 <param name="min">-1</param>
                 <param name="max">1</param>
