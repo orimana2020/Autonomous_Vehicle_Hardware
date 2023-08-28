@@ -18,14 +18,14 @@ teleop_node:
     qos_overrides./parameter_events.publisher.reliability: reliable
     scale_angular.pitch: 0.0
     scale_angular.roll: 0.0
-    scale_angular.yaw: 3.0
+    scale_angular.yaw: 1.0
     scale_angular_turbo.pitch: 0.0
     scale_angular_turbo.roll: 0.0
     scale_angular_turbo.yaw: 0.0
-    scale_linear.x: 3.0
+    scale_linear.x: 1.0
     scale_linear.y: 0.0
     scale_linear.z: 0.0
-    scale_linear_turbo.x: 6.0
+    scale_linear_turbo.x: 1.0
     scale_linear_turbo.y: 0.0
     scale_linear_turbo.z: 0.0
     use_sim_time: true

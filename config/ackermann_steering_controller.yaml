@@ -1,6 +1,6 @@
 controller_manager:
   ros__parameters:
-    update_rate: 30
+    update_rate: 100
     use_sim_time: true
 
     diff_cont:
@@ -16,7 +16,7 @@ controller_manager:
 
 diff_cont:
   ros__parameters:
-    publish_rate: 30.0
+    publish_rate: 100.0
     reference_timeout: 0.5
     front_steering: true
     open_loop: false
@@ -34,7 +34,7 @@ diff_cont:
     rear_wheel_track: 0.25
     front_wheels_radius: 0.056
     rear_wheels_radius: 0.056
-    max_steering_speed: 1.5707963267948966
+    max_steering_speed: 1.0
     max_steering_angle: 0.42
 
     pose_covariance_diagonal : [0.001, 0.001, 1000000.0, 1000000.0, 1000000.0, 1000.0]

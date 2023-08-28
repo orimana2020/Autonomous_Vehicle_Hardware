@@ -37,9 +37,8 @@ def generate_launch_description():
         executable='robot_state_publisher',
         name='robot_state_publisher',
         output='screen',
-        parameters=[params],
-        # remappings=[('/diff_cont/tf_odometry','/tf')]
-          )
+        parameters=[params],)
+          
    
 
     # Launch!

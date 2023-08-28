@@ -56,7 +56,6 @@ def generate_launch_description():
         executable="spawner",
         arguments=["diff_cont"],
         output="screen",
-        # remappings=[('/diff_cont/tf_odometry','/tf')]
     )
 
     joint_broad_spawner = Node(
@@ -64,15 +63,14 @@ def generate_launch_description():
         executable="spawner",
         arguments=["joint_broad"],
         output="screen",
-        # remappings=[('/joint_states','/tf'), ('/dynamic_joint_states', '/tf')]
     )
 
-    relay_topic_to_tf_node = Node(
-        package='topic_tools',
-        executable='relay',
-        arguments=['/diff_cont/tf_odometry', '/tf'],
-        output='screen',
-    )
+    # relay_topic_to_tf_node = Node(
+    #     package='topic_tools',
+    #     executable='relay',
+    #     arguments=['/diff_cont/tf_odometry', '/tf'],
+    #     output='screen',
+    # )
 
 
     
@@ -88,6 +86,6 @@ def generate_launch_description():
         spawn_entity,
         diff_drive_spawner,
         joint_broad_spawner,
-        relay_topic_to_tf_node,
+        # relay_topic_to_tf_node,
         
     ])

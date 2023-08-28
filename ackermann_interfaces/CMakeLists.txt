@@ -1,5 +1,5 @@
 cmake_minimum_required(VERSION 3.5)
-project(rc_car)
+project(ackermann_interfaces)
 
 # Default to C99
 if(NOT CMAKE_C_STANDARD)
@@ -17,18 +17,14 @@ endif()
 
 # find dependencies
 find_package(ament_cmake REQUIRED)
-find_package(ament_cmake_python REQUIRED)
-find_package(rclcpp REQUIRED)
-find_package(rclpy REQUIRED)
-find_package(geometry_msgs REQUIRED)
+find_package(rosidl_default_generators REQUIRED)
+find_package(std_msgs)
 
+rosidl_generate_interfaces(${PROJECT_NAME}
+  "msg/AckermannFeedback.msg"
+  DEPENDENCIES std_msgs
+)
 
-# add_executable(ackerman_feedback rc_car/ackerman_feedback_node.py)
-# ament_target_dependencies(ackerman_feedback rclpy geometry_msgs)
-
-# uncomment the following section in order to fill in
-# further dependencies manually.
-# find_package(<dependency> REQUIRED)
 
 if(BUILD_TESTING)
   find_package(ament_lint_auto REQUIRED)
@@ -41,19 +37,5 @@ if(BUILD_TESTING)
   ament_lint_auto_find_test_dependencies()
 endif()
 
-ament_python_install_package(${PROJECT_NAME})
-
-
-install(
-  DIRECTORY config description launch worlds scripts ackermann_interfaces
-  DESTINATION share/${PROJECT_NAME}
-)
-
-# Install Python executables
-install(PROGRAMS
-  scripts/ackerman_feedback_node.py
-  DESTINATION lib/${PROJECT_NAME}
-)
-
-
+ament_export_dependencies(rosidl_default_runtime)
 ament_package()
