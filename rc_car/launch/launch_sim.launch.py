@@ -65,6 +65,21 @@ def generate_launch_description():
         output="screen",
     )
 
+    odom_feedback = Node(
+        package="rc_car",
+        executable="ackerman_feedback_node.py",
+        name="odom_feedback"
+    )
+
+    odom_computation = Node(
+        package="ackermann_odometry",
+        executable="odom_publisher",
+        name="compute_odom"
+
+    )
+
+
+
     # relay_topic_to_tf_node = Node(
     #     package='topic_tools',
     #     executable='relay',
@@ -86,6 +101,8 @@ def generate_launch_description():
         spawn_entity,
         diff_drive_spawner,
         joint_broad_spawner,
+        odom_feedback,
+        odom_computation,
         # relay_topic_to_tf_node,
         
     ])
