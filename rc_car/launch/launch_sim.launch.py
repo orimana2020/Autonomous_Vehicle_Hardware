@@ -88,8 +88,6 @@ def generate_launch_description():
     # )
 
 
-    
-
 
     # Launch them all!
     return LaunchDescription([
@@ -99,8 +97,6 @@ def generate_launch_description():
         twist_stamper,
         gazebo,
         spawn_entity,
-        # TimerAction(period=5.0, actions=[diff_drive_spawner,joint_broad_spawner,
-        #                                  odom_feedback,odom_computation,]),
         diff_drive_spawner,
         joint_broad_spawner,
         odom_feedback,

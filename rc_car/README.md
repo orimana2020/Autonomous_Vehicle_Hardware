@@ -34,7 +34,9 @@ ros2 run rviz2 rviz2 -d src/rc_car/config/main.rviz --ros-args -p use_sim_time:=
 
 terminal 3: slam toolbox (mapping)
 ros2 launch rc_car online_async_launch.py use_sim_time:=true
-add map to rviz
+
+--- add map to rviz -----
 
 terminal 4: nav2 stack
-ros2 launch rc_car navigation_launch.py use_sim_time:=true# my_ackermann
+ros2 launch rc_car navigation_launch.py use_sim_time:=true
+
