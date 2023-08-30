@@ -61,11 +61,11 @@ class OdomPublisher(Node):
 
         # Publishers
         queue_size = 10
-        msg_type = 'tf2_msgs'
-        if msg_type == 'nav_msgs':
-            self.publisher = self.create_publisher(Odometry, 'odom', queue_size)
-        elif msg_type == 'tf2_msgs':
-            self.publisher = self.create_publisher(TFMessage, 'tf', queue_size)
+        # msg_type = 'tf2_msgs'
+        # if msg_type == 'nav_msgs':
+        self.publisher_odom = self.create_publisher(Odometry, 'odom', queue_size)
+        # elif msg_type == 'tf2_msgs':
+        self.publisher_tf = self.create_publisher(TFMessage, 'tf', queue_size)
 
 
         # Subscribers
@@ -118,68 +118,72 @@ class OdomPublisher(Node):
     def output(self, state: AckermannState) -> Odometry:
         """Build Odometry message from state"""
         quaternion = state.orientation.as_quat()
-        # linear_speed = self.wheel_radius * (state.left_wheel_speed + state.right_wheel_speed) / 2
-        # linear_velocity = self.linear_velocity(state.orientation, linear_speed)
-        # angular_speed = linear_speed / self.turn_radius(state.steering_angle)
+        linear_speed = self.wheel_radius * (state.left_wheel_speed + state.right_wheel_speed) / 2
+        linear_velocity = self.linear_velocity(state.orientation, linear_speed)
+        angular_speed = linear_speed / self.turn_radius(state.steering_angle)
 
-        msg = TFMessage()
-        msg.transforms.append(TransformStamped())
-        msg.transforms[0].header.stamp = state.time.to_msg()
-        msg.transforms[0].header.frame_id = "odom"
-        msg.transforms[0].child_frame_id = "base_link"
-        msg.transforms[0].transform.translation.x = state.position[0]
-        msg.transforms[0].transform.translation.y = state.position[1]
-        msg.transforms[0].transform.translation.z = state.position[2]
-        msg.transforms[0].transform.rotation.x = quaternion[0]
-        msg.transforms[0].transform.rotation.y = quaternion[1]
-        msg.transforms[0].transform.rotation.z = quaternion[2]
-        msg.transforms[0].transform.rotation.w = quaternion[3]
-        return msg
+        tf_msg = TFMessage()
+        tf_msg.transforms.append(TransformStamped())
+        tf_msg.transforms[0].header.stamp = state.time.to_msg()
+        tf_msg.transforms[0].header.frame_id = "odom"
+        tf_msg.transforms[0].child_frame_id = "base_link"
+        tf_msg.transforms[0].transform.translation.x = state.position[0]
+        tf_msg.transforms[0].transform.translation.y = state.position[1]
+        tf_msg.transforms[0].transform.translation.z = state.position[2]
+        tf_msg.transforms[0].transform.rotation.x = quaternion[0]
+        tf_msg.transforms[0].transform.rotation.y = quaternion[1]
+        tf_msg.transforms[0].transform.rotation.z = quaternion[2]
+        tf_msg.transforms[0].transform.rotation.w = quaternion[3]
+        
     
 
-        # return Odometry(
-        #     header=Header(
-        #         stamp=state.time.to_msg(),
-        #         frame_id='odom'
-        #     ),
-        #     child_frame_id='',
-        #     pose=PoseWithCovariance(
-        #         pose=Pose(
-        #             position=Point(
-        #                 x=state.position[0],
-        #                 y=state.position[1],
-        #                 z=state.position[2]
-        #             ),
-        #             orientation=Quaternion(
-        #                 x=quaternion[0],
-        #                 y=quaternion[1],
-        #                 z=quaternion[2],
-        #                 w=quaternion[3]
-        #             )
-        #         )
-        #     ),
-        #     twist=TwistWithCovariance(
-        #         twist=Twist(
-        #             linear=Vector3(
-        #                 x=linear_velocity[0],
-        #                 y=linear_velocity[1],
-        #                 z=linear_velocity[2]
-        #             ),
-        #             angular=Vector3(
-        #                 z=angular_speed
-        #             )
-        #         )
-        #     )
-        # )
+        odom_msg =  Odometry(
+            header=Header(
+                stamp=state.time.to_msg(),
+                frame_id='odom'
+            ),
+            child_frame_id="base_link",
+            pose=PoseWithCovariance(
+                pose=Pose(
+                    position=Point(
+                        x=state.position[0],
+                        y=state.position[1],
+                        z=state.position[2]
+                    ),
+                    orientation=Quaternion(
+                        x=quaternion[0],
+                        y=quaternion[1],
+                        z=quaternion[2],
+                        w=quaternion[3]
+                    )
+                )
+            ),
+            twist=TwistWithCovariance(
+                twist=Twist(
+                    linear=Vector3(
+                        x=linear_velocity[0],
+                        y=linear_velocity[1],
+                        z=linear_velocity[2]
+                    ),
+                    angular=Vector3(
+                        z=angular_speed
+                    )
+                )
+            )
+        )
+
+        return tf_msg, odom_msg
 
     def feedback_callback(self, msg: AckermannFeedback):
         """Update state and publish to Odometry"""
         self.state = self.state_update(self.state, msg)
         self.get_logger().debug(f'state update: {self.state}')
-        output = self.output(self.state)
-        self.get_logger().debug(f'odometry: {output}')
-
-        self.publisher.publish(output)
+        # output = self.output(self.state)
+        tf_msg, odom_msg = self.output(self.state)
+        # self.get_logger().debug(f'odometry: {output}')
+        self.publisher_tf.publish(tf_msg)
+        self.publisher_odom.publish(odom_msg)
+        # self.publisher.publish(output)
 
     def turn_radius(self, steering_angle: float) -> float:
         """

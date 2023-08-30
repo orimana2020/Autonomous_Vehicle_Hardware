@@ -1,7 +1,7 @@
 # Autonomous_RC
 
 
-first install ros2, 
+first install ros2 humble - see documentation 
 
 sudo apt install ros-humble-xacro ros-humble-joint-state-publisher-gui
 
@@ -28,12 +28,31 @@ sudo apt install ros-humble-twist-mux
 ----------Launch sim--------------
 terminal 1: gazebo
 ros2 launch rc_car launch_sim.launch.py world:=src/rc_car/worlds/obstacles.world
+ros2 launch rc_car launch_sim.launch.py world:=src/rc_car/worlds/maze1.world
+
 
 terminal 2: rviz
 ros2 run rviz2 rviz2 -d src/rc_car/config/main.rviz --ros-args -p use_sim_time:=true
 
+
 terminal 3: slam toolbox (mapping)
+add map to rviz
 ros2 launch rc_car online_async_launch.py use_sim_time:=true
+save the map with rviz, add new panel->slam tool box plugin, serialize the map
+
+reset the simulation, 
+change the mapper params online async.yaml:
+
+mode: localization
+map_file_name: /home/ori/dev_ws/my_map_serial
+map_start_at_dock: true
+
+---------------
+run gazebo and rviz
+this loads the saved map and localiztion
+ros2 launch rc_car localization_launch.py use_sim_time:=true map:=./maze1_map.yaml 
+
+
 
 --- add map to rviz -----
 
