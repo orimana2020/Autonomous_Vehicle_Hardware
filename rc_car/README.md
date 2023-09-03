@@ -47,15 +47,22 @@ mode: localization
 map_file_name: /home/ori/dev_ws/my_map_serial
 map_start_at_dock: true
 
+
+need to copy the localizion_launch from slam_toolbox and rerun the simulation
+this is not the same localization_launch from Nav2 package(in this repo)
 ---------------
+
+--- gazebo + Rviz + localization + navigation -----
+from this point we dont use slam_toolbox - so the base map will not get updates.
+
 run gazebo and rviz
-this loads the saved map and localiztion
-ros2 launch rc_car localization_launch.py use_sim_time:=true map:=./maze1_map.yaml 
 
+run:(localiztion by nav2)
+ros2 launch rc_car localization_launch.py map:=./src/rc_car/maps/maze_1/maze1_map.yaml use_sim_time:=true
+add map, set the initial pos, change topic->durability policy->transient local
 
+run:(navigation bu nav2)
+ros2 launch rc_car navigation_launch.py use_sim_time:=true map_subscribe_transient_local:=true
+add map, topic: /global_costmap, color scheme: cost_map
 
---- add map to rviz -----
-
-terminal 4: nav2 stack
-ros2 launch rc_car navigation_launch.py use_sim_time:=true
 
