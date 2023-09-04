@@ -50,19 +50,31 @@ map_start_at_dock: true
 
 need to copy the localizion_launch from slam_toolbox and rerun the simulation
 this is not the same localization_launch from Nav2 package(in this repo)
----------------
+-----------------------------------------
+
+
 
 --- gazebo + Rviz + localization + navigation -----
 from this point we dont use slam_toolbox - so the base map will not get updates.
 
-run gazebo and rviz
+---terminal 1---:
+ros2 launch rc_car launch_sim.launch.py world:=src/rc_car/worlds/maze1.world
 
-run:(localiztion by nav2)
+---terminal 2---:
+ros2 run rviz2 rviz2 -d src/rc_car/config/main.rviz --ros-args -p use_sim_time:=true
+
+---terminal 3---:
 ros2 launch rc_car localization_launch.py map:=./src/rc_car/maps/maze_1/maze1_map.yaml use_sim_time:=true
-add map, set the initial pos, change topic->durability policy->transient local
 
-run:(navigation bu nav2)
+step 1: in rviz, manually write "map" in fixed frame
+step 2: change set initial position
+step 3: add map
+step 4: topic->durability policy->transient local
+
+---terminal 4---:
 ros2 launch rc_car navigation_launch.py use_sim_time:=true map_subscribe_transient_local:=true
-add map, topic: /global_costmap, color scheme: cost_map
+
+step 1:add map
+step 2: topic: /global_costmap, color scheme: cost_map
 
 

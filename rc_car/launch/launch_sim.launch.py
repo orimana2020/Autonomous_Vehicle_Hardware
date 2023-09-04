@@ -78,6 +78,14 @@ def generate_launch_description():
 
     )
 
+    robot_localization_node = Node(
+       package='robot_localization',
+       executable='ekf_node',
+       name='ekf_filter_node',
+       output='screen',
+       parameters=[os.path.join(get_package_share_directory(package_name),'config','ekf.yaml'), {'use_sim_time': 'true'}]
+    )
+
 
 
     # relay_topic_to_tf_node = Node(
@@ -101,5 +109,6 @@ def generate_launch_description():
         joint_broad_spawner,
         odom_feedback,
         odom_computation,
+        robot_localization_node,
         
     ])
