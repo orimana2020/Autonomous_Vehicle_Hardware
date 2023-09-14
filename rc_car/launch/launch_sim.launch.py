@@ -83,7 +83,7 @@ def generate_launch_description():
        executable='ekf_node',
        name='ekf_filter_node',
        output='screen',
-       parameters=[os.path.join(get_package_share_directory(package_name),'config','ekf.yaml'), {'use_sim_time': 'true'}]
+       parameters=[os.path.join(get_package_share_directory(package_name),'config','ekf.yaml'), {'use_sim_time': True}]
     )
 
 

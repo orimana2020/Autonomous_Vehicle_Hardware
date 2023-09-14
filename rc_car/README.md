@@ -78,3 +78,31 @@ step 1:add map
 step 2: topic: /global_costmap, color scheme: cost_map
 
 
+-----------------------------------
+
+REAL ROBOT
+
+setting up ssh:
+1. sudo apt install openssh-server
+2. service ssh status
+3. sudo ufw allow ssh
+4. ssh 127.0.0.1
+5. ip addr
+6. ssh robot1@172.20.10.5
+
+
+Low level
+serial over usb:
+sudo apt install python3-serial
+
+arduino ros bridge:
+https://github.com/joshnewans/ros_arduino_bridge.git
+
+add permission to arduino 
+sudo chmod a+rw /dev/ttyACM0
+
+sudo apt-get install python-pip
+sudo pip install pyserial
+
+run in terminal 
+pyserial-miniterm -e /dev/ttyACM0 57600
