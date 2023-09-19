@@ -82,6 +82,32 @@ step 2: topic: /global_costmap, color scheme: cost_map
 
 REAL ROBOT
 
+download imager to burn OS to PI
+option 1: download ubuntu mate for PI 64 from https://ubuntu-mate.org/download/
+option 2: https://ubuntu.com/download/raspberry-pi/thank-you?version=22.04.3&architecture=desktop-arm64+raspi 
+burn the image to the micro-sd card
+
+* CRITICAL*
+after installtion update TIME and DATE before sudo apt update and upgrade
+
+only for dev machine:
+    sudo snap install --classic code
+
+sudo apt install git 
+install arduino: https://docs.arduino.cc/software/ide-v1/tutorials/Linux
+if option 1 selected:
+    only on pi: sudo apt remove brltty
+    sudo nano /boot/firmware/config.txt 
+            -> change: camera_auto_detect=0
+            -> add new line: start_x=1
+
+install ros:https://docs.ros.org/en/humble/Installation/Ubuntu-Install-Debians.html
+        -> skip: set locale
+        -> setup sources
+        -> install ros2 packages , desktop version
+
+
+
 setting up ssh:
 1. sudo apt install openssh-server
 2. service ssh status
@@ -98,7 +124,7 @@ sudo apt install python3-serial
 arduino ros bridge:
 https://github.com/joshnewans/ros_arduino_bridge.git
 
-add permission to arduino 
+add permission to arduino:
 sudo chmod a+rw /dev/ttyACM0
 
 sudo apt-get install python-pip
