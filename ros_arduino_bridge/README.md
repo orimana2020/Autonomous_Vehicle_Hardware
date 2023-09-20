@@ -1,3 +1,6 @@
+the first version - not to work with ros2_control- instead works with topics and serial motor demo
+
+
 # Arduino Motor Controller
 
 This code turns an Arduino into a motor controller!

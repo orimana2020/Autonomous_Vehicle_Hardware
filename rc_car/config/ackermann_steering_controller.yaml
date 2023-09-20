@@ -1,12 +1,12 @@
 controller_manager:
   ros__parameters:
     update_rate: 100
-    use_sim_time: true
+    # use_sim_time: true
 
     diff_cont:
       type: ackermann_steering_controller/AckermannSteeringController
       
-
+    # joint state bradcaster to tell the robot state publisher the state of the joints
     joint_broad:
       type: joint_state_broadcaster/JointStateBroadcaster
 

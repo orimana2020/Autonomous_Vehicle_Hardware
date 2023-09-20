@@ -107,6 +107,7 @@
     </visual>
     <collision>
       <geometry>
+        <!-- <sphere radius="${wheel_radius}" /> -->
         <cylinder length="${wheel_width}" radius="${wheel_radius}" />
       </geometry>
     </collision>

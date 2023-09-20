@@ -106,7 +106,8 @@ install ros:https://docs.ros.org/en/humble/Installation/Ubuntu-Install-Debians.h
         -> setup sources
         -> install ros2 packages , desktop version
 
-
+sudo apt-get install python3-pip
+pip install setuptools==58.2.0
 
 setting up ssh:
 1. sudo apt install openssh-server
@@ -119,7 +120,10 @@ setting up ssh:
 
 Low level
 serial over usb:
-sudo apt install python3-serial
+sudo apt install python3-serial / sudo pip install pyserial
+sudo apt install libserial-dev
+
+
 
 arduino ros bridge:
 https://github.com/joshnewans/ros_arduino_bridge.git
@@ -127,8 +131,15 @@ https://github.com/joshnewans/ros_arduino_bridge.git
 add permission to arduino:
 sudo chmod a+rw /dev/ttyACM0
 
-sudo apt-get install python-pip
-sudo pip install pyserial
+
 
 run in terminal 
 pyserial-miniterm -e /dev/ttyACM0 57600
+
+
+how to remap:
+ros2 run teleop_twist_keyboard --ros-args -r /cmd_vel:=/diff_cont/cmd_vel_unstampted
+
+
+ros_arduino_bridge + serial_motor_demo - works with topics, not as ros2_control 
+diff_drive_arduino + serial works with ros2_control, the diffdrive_arduino package is called from ros2_control.xacro
