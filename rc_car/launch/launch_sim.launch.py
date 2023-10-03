@@ -65,26 +65,25 @@ def generate_launch_description():
         output="screen",
     )
 
-    odom_feedback = Node(
+    odom_feedback = Node( #subscribe to /diff_cont/controller_state and publish ackermanfeedback msg
         package="rc_car",
         executable="ackerman_feedback_node.py",
         name="odom_feedback"
     )
 
-    odom_computation = Node(
+    odom_computation = Node( #subscribe to /feedback [ackerman feedback], calculate odometry, and publish to /odom and /tf
         package="ackermann_odometry",
         executable="odom_publisher",
         name="compute_odom"
-
     )
 
-    robot_localization_node = Node(
-       package='robot_localization',
-       executable='ekf_node',
-       name='ekf_filter_node',
-       output='screen',
-       parameters=[os.path.join(get_package_share_directory(package_name),'config','ekf.yaml'), {'use_sim_time': True}]
-    )
+    # robot_localization_node = Node( #not working well
+    #    package='robot_localization',
+    #    executable='ekf_node',
+    #    name='ekf_filter_node',
+    #    output='screen',
+    #    parameters=[os.path.join(get_package_share_directory(package_name),'config','ekf.yaml'), {'use_sim_time': True}]
+    # )
 
 
 
@@ -109,6 +108,6 @@ def generate_launch_description():
         joint_broad_spawner,
         odom_feedback,
         odom_computation,
-        robot_localization_node,
+        # robot_localization_node,
         
     ])
