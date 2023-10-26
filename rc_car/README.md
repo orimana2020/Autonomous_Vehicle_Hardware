@@ -141,5 +141,14 @@ how to remap:
 ros2 run teleop_twist_keyboard --ros-args -r /cmd_vel:=/diff_cont/cmd_vel_unstampted
 
 
-ros_arduino_bridge + serial_motor_demo - works with topics, not as ros2_control 
+low level control packages:
+1. ros_arduino_bridge - burn to arduino
+pyserial-miniterm -e /dev/ttyACM0 57600
+with o - open loop, e- encoders, m-closed loop
+
+2. serial_motor_demo - gui to send commands over node - clone and colcon build
+
+1.+2. works with topics, not as ros2_control 
+
+
 diff_drive_arduino + serial works with ros2_control, the diffdrive_arduino package is called from ros2_control.xacro
