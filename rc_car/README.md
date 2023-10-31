@@ -150,5 +150,29 @@ with o - open loop, e- encoders, m-closed loop
 
 1.+2. works with topics, not as ros2_control 
 
-
+diff_drive_arduino- hardware interface
 diff_drive_arduino + serial works with ros2_control, the diffdrive_arduino package is called from ros2_control.xacro
+
+
+
+------------ ROS BICYCLE SIMULATION ------------------
+
+TERMINAL 1 :
+ros2 launch rc_car launch_sim_bicycle.launch.py world:=src/rc_car/worlds/maze1.world
+
+TERMINAL 2 :
+ros2 run rviz2 rviz2 -d src/rc_car/config/main.rviz --ros-args -p use_sim_time:=true
+
+TERMINAL 3 :
+ros2 launch rc_car localization_launch.py map:=./src/rc_car/maps/maze_1/maze1_map.yaml use_sim_time:=true
+
+step 1: in rviz, manually write "map" in fixed frame
+step 2: change set initial position
+step 3: add map
+step 4: topic->durability policy->transient local
+
+---terminal 4---:
+ros2 launch rc_car navigation_launch.py use_sim_time:=true map_subscribe_transient_local:=true
+
+step 1:add map
+step 2: topic: /global_costmap, color scheme: cost_map

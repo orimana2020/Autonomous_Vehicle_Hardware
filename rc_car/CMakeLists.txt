@@ -45,13 +45,13 @@ ament_python_install_package(${PROJECT_NAME})
 
 
 install(
-  DIRECTORY config description launch worlds scripts ackermann_interfaces
+  DIRECTORY config description launch worlds scripts 
   DESTINATION share/${PROJECT_NAME}
 )
 
 # Install Python executables
 install(PROGRAMS
-  scripts/ackerman_feedback_node.py
+  scripts/odom_publisher_bicycle.py
   DESTINATION lib/${PROJECT_NAME}
 )
 

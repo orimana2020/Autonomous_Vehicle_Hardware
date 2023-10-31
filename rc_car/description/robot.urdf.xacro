@@ -4,19 +4,20 @@
     <xacro:arg name="use_ros2_control" default="true"/>
     <xacro:arg name="sim_mode" default="false"/> 
     
-    <xacro:include filename="Traxxes.xacro" />
-    <!-- we only use ros2_control, we don't use gazebo control -->
-    <xacro:if value="$(arg use_ros2_control)">
-        <xacro:include filename="ros2_control.xacro" />
-    </xacro:if> 
-    <!-- <xacro:unless value="$(arg use_ros2_control)">
-
-    </xacro:unless> -->
+    <xacro:include filename="Traxxes_2DOF.xacro" />
+    <xacro:include filename="ros2_control_bicycle.xacro" />
     <xacro:include filename="lidar.xacro" />
-
     <xacro:include filename="camera.xacro" />
     <xacro:include filename="imu.xacro"/>
     <!-- <xacro:include filename="depth_camera.xacro" /> -->
     <!-- <xacro:include filename="face.xacro" /> -->
+
+
+    <!-- <xacro:if value="$(arg use_ros2_control)"> -->
+    <!-- </xacro:if>  -->
+    <!-- <xacro:unless value="$(arg use_ros2_control)">
+    </xacro:unless> -->
+
+    
     
 </robot>

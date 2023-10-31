@@ -24,8 +24,9 @@ def generate_launch_description():
     twist_mux = Node(
             package="twist_mux",
             executable="twist_mux",
-            parameters=[twist_mux_params, {'use_sim_time': True}])
+            parameters=[twist_mux_params, {'use_sim_time': True}],
             # remappings=[('/cmd_vel_out','/diff_cont/reference')] )
+            )
 
     twist_stamper = Node(
         package='twist_stamper',
@@ -55,6 +56,7 @@ def generate_launch_description():
         package="controller_manager",
         executable="spawner",
         arguments=["diff_cont"],
+        # remappings=[("/diff_cont/tf_odometry","/tf")],
         output="screen",
     )
 
@@ -65,15 +67,10 @@ def generate_launch_description():
         output="screen",
     )
 
-    odom_feedback = Node( #subscribe to /diff_cont/controller_state and publish ackermanfeedback msg
-        package="rc_car",
-        executable="ackerman_feedback_node.py",
-        name="odom_feedback"
-    )
 
-    odom_computation = Node( #subscribe to /feedback [ackerman feedback], calculate odometry, and publish to /odom and /tf
-        package="ackermann_odometry",
-        executable="odom_publisher",
+    odom_computation = Node( 
+        package="rc_car",
+        executable="odom_publisher_bicycle.py",
         name="compute_odom"
     )
 
@@ -106,7 +103,6 @@ def generate_launch_description():
         spawn_entity,
         diff_drive_spawner,
         joint_broad_spawner,
-        odom_feedback,
         odom_computation,
         # robot_localization_node,
         
