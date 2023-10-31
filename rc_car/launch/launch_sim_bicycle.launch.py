@@ -1,7 +1,8 @@
 import os
 from ament_index_python.packages import get_package_share_directory
 from launch import LaunchDescription
-from launch.actions import IncludeLaunchDescription, TimerAction
+from launch.substitutions import LaunchConfiguration
+from launch.actions import IncludeLaunchDescription, TimerAction, DeclareLaunchArgument
 from launch.launch_description_sources import PythonLaunchDescriptionSource
 from launch_ros.actions import Node
 
@@ -74,6 +75,16 @@ def generate_launch_description():
         name="compute_odom"
     )
 
+    default_rviz_config_path = os.path.join(get_package_share_directory(package_name), 'config/main.rviz')
+    rviz_node = Node(
+        package='rviz2',
+        executable='rviz2',
+        name='rviz2',
+        output='screen',
+        arguments=['-d', LaunchConfiguration('rvizconfig')],
+    )
+
+
     # robot_localization_node = Node( #not working well
     #    package='robot_localization',
     #    executable='ekf_node',
@@ -95,6 +106,8 @@ def generate_launch_description():
 
     # Launch them all!
     return LaunchDescription([
+        DeclareLaunchArgument(name='rvizconfig', default_value=default_rviz_config_path,
+                                            description='Absolute path to rviz config file'),
         rsp,
         joystick,
         twist_mux,
@@ -104,6 +117,7 @@ def generate_launch_description():
         diff_drive_spawner,
         joint_broad_spawner,
         odom_computation,
+        rviz_node,
         # robot_localization_node,
         
     ])
