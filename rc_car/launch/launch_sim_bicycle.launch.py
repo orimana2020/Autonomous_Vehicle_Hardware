@@ -38,6 +38,9 @@ def generate_launch_description():
         )
         
 
+    # Set the path to the world file
+    world_file_name = 'maze1.world'
+    world_path = os.path.join(get_package_share_directory(package_name), 'worlds',world_file_name )
     gazebo_params_file = os.path.join(get_package_share_directory(package_name),'config','gazebo_params.yaml')
 
     # Include the Gazebo launch file, provided by the gazebo_ros package
@@ -108,6 +111,10 @@ def generate_launch_description():
     return LaunchDescription([
         DeclareLaunchArgument(name='rvizconfig', default_value=default_rviz_config_path,
                                             description='Absolute path to rviz config file'),
+        DeclareLaunchArgument(name='world',default_value=world_path,
+                                            description='Full path to the world model file to load'),
+    
+    
         rsp,
         joystick,
         twist_mux,
