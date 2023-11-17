@@ -1,4 +1,0 @@
-Invoking command in '/home/ori/my_ackermann/build/diffdrive_arduino': CMAKE_PREFIX_PATH=${CMAKE_PREFIX_PATH}:/opt/ros/humble /usr/bin/cmake --build /home/ori/my_ackermann/build/diffdrive_arduino -- -j20 -l20
-Invoked command in '/home/ori/my_ackermann/build/diffdrive_arduino' returned '0': CMAKE_PREFIX_PATH=${CMAKE_PREFIX_PATH}:/opt/ros/humble /usr/bin/cmake --build /home/ori/my_ackermann/build/diffdrive_arduino -- -j20 -l20
-Invoking command in '/home/ori/my_ackermann/build/diffdrive_arduino': CMAKE_PREFIX_PATH=${CMAKE_PREFIX_PATH}:/opt/ros/humble /usr/bin/cmake --install /home/ori/my_ackermann/build/diffdrive_arduino
-Invoked command in '/home/ori/my_ackermann/build/diffdrive_arduino' returned '0': CMAKE_PREFIX_PATH=${CMAKE_PREFIX_PATH}:/opt/ros/humble /usr/bin/cmake --install /home/ori/my_ackermann/build/diffdrive_arduino

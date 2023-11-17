@@ -1,4 +1,0 @@
-Invoking command in '/home/ori/my_ackermann/build/rc_car': CMAKE_PREFIX_PATH=/opt/ros/humble /usr/bin/cmake --build /home/ori/my_ackermann/build/rc_car -- -j20 -l20
-Invoked command in '/home/ori/my_ackermann/build/rc_car' returned '0': CMAKE_PREFIX_PATH=/opt/ros/humble /usr/bin/cmake --build /home/ori/my_ackermann/build/rc_car -- -j20 -l20
-Invoking command in '/home/ori/my_ackermann/build/rc_car': CMAKE_PREFIX_PATH=/opt/ros/humble /usr/bin/cmake --install /home/ori/my_ackermann/build/rc_car
-Invoked command in '/home/ori/my_ackermann/build/rc_car' returned '0': CMAKE_PREFIX_PATH=/opt/ros/humble /usr/bin/cmake --install /home/ori/my_ackermann/build/rc_car

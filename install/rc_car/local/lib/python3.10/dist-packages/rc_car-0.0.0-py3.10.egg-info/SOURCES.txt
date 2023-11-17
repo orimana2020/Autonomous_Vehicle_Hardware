@@ -1,6 +1,0 @@
-setup.py
-rc_car/__init__.py
-rc_car.egg-info/PKG-INFO
-rc_car.egg-info/SOURCES.txt
-rc_car.egg-info/dependency_links.txt
-rc_car.egg-info/top_level.txt
