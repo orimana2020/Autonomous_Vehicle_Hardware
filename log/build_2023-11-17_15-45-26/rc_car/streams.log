@@ -1,0 +1,85 @@
+[0.079s] Invoking command in '/home/ori/my_ackermann/build/rc_car': CMAKE_PREFIX_PATH=${CMAKE_PREFIX_PATH}:/opt/ros/humble /usr/bin/cmake --build /home/ori/my_ackermann/build/rc_car -- -j20 -l20
+[0.111s] Built target ament_cmake_python_copy_rc_car
+[0.276s] running egg_info
+[0.277s] writing rc_car.egg-info/PKG-INFO
+[0.277s] writing dependency_links to rc_car.egg-info/dependency_links.txt
+[0.277s] writing top-level names to rc_car.egg-info/top_level.txt
+[0.278s] reading manifest file 'rc_car.egg-info/SOURCES.txt'
+[0.278s] writing manifest file 'rc_car.egg-info/SOURCES.txt'
+[0.295s] Built target ament_cmake_python_build_rc_car_egg
+[0.410s] Invoked command in '/home/ori/my_ackermann/build/rc_car' returned '0': CMAKE_PREFIX_PATH=${CMAKE_PREFIX_PATH}:/opt/ros/humble /usr/bin/cmake --build /home/ori/my_ackermann/build/rc_car -- -j20 -l20
+[0.451s] Invoking command in '/home/ori/my_ackermann/build/rc_car': CMAKE_PREFIX_PATH=${CMAKE_PREFIX_PATH}:/opt/ros/humble /usr/bin/cmake --install /home/ori/my_ackermann/build/rc_car
+[0.455s] -- Install configuration: ""
+[0.455s] -- Up-to-date: /home/ori/my_ackermann/install/rc_car/share/rc_car/environment/pythonpath.sh
+[0.455s] -- Up-to-date: /home/ori/my_ackermann/install/rc_car/share/rc_car/environment/pythonpath.dsv
+[0.455s] -- Up-to-date: /home/ori/my_ackermann/install/rc_car/local/lib/python3.10/dist-packages/rc_car-0.0.0-py3.10.egg-info
+[0.455s] -- Installing: /home/ori/my_ackermann/install/rc_car/local/lib/python3.10/dist-packages/rc_car-0.0.0-py3.10.egg-info/dependency_links.txt
+[0.456s] -- Installing: /home/ori/my_ackermann/install/rc_car/local/lib/python3.10/dist-packages/rc_car-0.0.0-py3.10.egg-info/top_level.txt
+[0.456s] -- Installing: /home/ori/my_ackermann/install/rc_car/local/lib/python3.10/dist-packages/rc_car-0.0.0-py3.10.egg-info/PKG-INFO
+[0.456s] -- Installing: /home/ori/my_ackermann/install/rc_car/local/lib/python3.10/dist-packages/rc_car-0.0.0-py3.10.egg-info/SOURCES.txt
+[0.456s] -- Up-to-date: /home/ori/my_ackermann/install/rc_car/local/lib/python3.10/dist-packages/rc_car
+[0.456s] -- Up-to-date: /home/ori/my_ackermann/install/rc_car/local/lib/python3.10/dist-packages/rc_car/__init__.py
+[0.479s] Listing '/home/ori/my_ackermann/install/rc_car/local/lib/python3.10/dist-packages/rc_car'...
+[0.482s] -- Up-to-date: /home/ori/my_ackermann/install/rc_car/share/rc_car/config
+[0.482s] -- Up-to-date: /home/ori/my_ackermann/install/rc_car/share/rc_car/config/joystick.yaml
+[0.482s] -- Up-to-date: /home/ori/my_ackermann/install/rc_car/share/rc_car/config/mapper_params_online_async.yaml
+[0.483s] -- Up-to-date: /home/ori/my_ackermann/install/rc_car/share/rc_car/config/main.rviz
+[0.483s] -- Up-to-date: /home/ori/my_ackermann/install/rc_car/share/rc_car/config/map.rviz
+[0.483s] -- Up-to-date: /home/ori/my_ackermann/install/rc_car/share/rc_car/config/view_bot.rviz
+[0.483s] -- Up-to-date: /home/ori/my_ackermann/install/rc_car/share/rc_car/config/gaz_ros2_ctl_use_sim.yaml
+[0.483s] -- Up-to-date: /home/ori/my_ackermann/install/rc_car/share/rc_car/config/ball_tracker_params_sim.yaml
+[0.484s] -- Up-to-date: /home/ori/my_ackermann/install/rc_car/share/rc_car/config/bicycle_steering_controller.yaml
+[0.484s] -- Up-to-date: /home/ori/my_ackermann/install/rc_car/share/rc_car/config/gazebo_params.yaml
+[0.484s] -- Up-to-date: /home/ori/my_ackermann/install/rc_car/share/rc_car/config/empty.yaml
+[0.484s] -- Up-to-date: /home/ori/my_ackermann/install/rc_car/share/rc_car/config/ball_tracker_params_robot.yaml
+[0.484s] -- Up-to-date: /home/ori/my_ackermann/install/rc_car/share/rc_car/config/drive_bot.rviz
+[0.484s] -- Up-to-date: /home/ori/my_ackermann/install/rc_car/share/rc_car/config/ekf.yaml
+[0.484s] -- Up-to-date: /home/ori/my_ackermann/install/rc_car/share/rc_car/config/twist_mux.yaml
+[0.484s] -- Up-to-date: /home/ori/my_ackermann/install/rc_car/share/rc_car/config/nav2_params.yaml
+[0.484s] -- Up-to-date: /home/ori/my_ackermann/install/rc_car/share/rc_car/description
+[0.485s] -- Installing: /home/ori/my_ackermann/install/rc_car/share/rc_car/description/robot.urdf.xacro
+[0.485s] -- Up-to-date: /home/ori/my_ackermann/install/rc_car/share/rc_car/description/camera.xacro
+[0.485s] -- Up-to-date: /home/ori/my_ackermann/install/rc_car/share/rc_car/description/imu.xacro
+[0.485s] -- Up-to-date: /home/ori/my_ackermann/install/rc_car/share/rc_car/description/depth_camera.xacro
+[0.485s] -- Installing: /home/ori/my_ackermann/install/rc_car/share/rc_car/description/Traxxes_2DOF.xacro
+[0.485s] -- Up-to-date: /home/ori/my_ackermann/install/rc_car/share/rc_car/description/lidar.xacro
+[0.485s] -- Up-to-date: /home/ori/my_ackermann/install/rc_car/share/rc_car/description/face.xacro
+[0.485s] -- Up-to-date: /home/ori/my_ackermann/install/rc_car/share/rc_car/description/depricated_Traxxes.xacro
+[0.485s] -- Up-to-date: /home/ori/my_ackermann/install/rc_car/share/rc_car/description/ros2_control_bicycle.xacro
+[0.485s] -- Installing: /home/ori/my_ackermann/install/rc_car/share/rc_car/description/ground_truth.xacro
+[0.485s] -- Up-to-date: /home/ori/my_ackermann/install/rc_car/share/rc_car/description/inertial_macros.xacro
+[0.485s] -- Up-to-date: /home/ori/my_ackermann/install/rc_car/share/rc_car/launch
+[0.485s] -- Up-to-date: /home/ori/my_ackermann/install/rc_car/share/rc_car/launch/online_async_launch.py
+[0.485s] -- Up-to-date: /home/ori/my_ackermann/install/rc_car/share/rc_car/launch/rsp.launch.py
+[0.485s] -- Installing: /home/ori/my_ackermann/install/rc_car/share/rc_car/launch/launch_sim_bicycle.launch.py
+[0.485s] -- Up-to-date: /home/ori/my_ackermann/install/rc_car/share/rc_car/launch/joystick.launch.py
+[0.485s] -- Up-to-date: /home/ori/my_ackermann/install/rc_car/share/rc_car/launch/ball_tracker.launch.py
+[0.485s] -- Up-to-date: /home/ori/my_ackermann/install/rc_car/share/rc_car/launch/rplidar.launch.py
+[0.485s] -- Up-to-date: /home/ori/my_ackermann/install/rc_car/share/rc_car/launch/camera.launch.py
+[0.485s] -- Up-to-date: /home/ori/my_ackermann/install/rc_car/share/rc_car/launch/launch_robot.launch.py
+[0.485s] -- Up-to-date: /home/ori/my_ackermann/install/rc_car/share/rc_car/launch/localization_launch.py
+[0.485s] -- Up-to-date: /home/ori/my_ackermann/install/rc_car/share/rc_car/launch/navigation_launch.py
+[0.485s] -- Up-to-date: /home/ori/my_ackermann/install/rc_car/share/rc_car/worlds
+[0.485s] -- Up-to-date: /home/ori/my_ackermann/install/rc_car/share/rc_car/worlds/empty.world
+[0.485s] -- Up-to-date: /home/ori/my_ackermann/install/rc_car/share/rc_car/worlds/obstacles.world
+[0.485s] -- Up-to-date: /home/ori/my_ackermann/install/rc_car/share/rc_car/worlds/maze1.world
+[0.485s] -- Up-to-date: /home/ori/my_ackermann/install/rc_car/share/rc_car/scripts
+[0.486s] -- Up-to-date: /home/ori/my_ackermann/install/rc_car/share/rc_car/scripts/odom_ground_truth.py
+[0.486s] -- Up-to-date: /home/ori/my_ackermann/install/rc_car/share/rc_car/scripts/odom_publisher_bicycle.py
+[0.486s] -- Up-to-date: /home/ori/my_ackermann/install/rc_car/lib/rc_car/odom_publisher_bicycle.py
+[0.486s] -- Up-to-date: /home/ori/my_ackermann/install/rc_car/share/ament_index/resource_index/package_run_dependencies/rc_car
+[0.486s] -- Up-to-date: /home/ori/my_ackermann/install/rc_car/share/ament_index/resource_index/parent_prefix_path/rc_car
+[0.486s] -- Up-to-date: /home/ori/my_ackermann/install/rc_car/share/rc_car/environment/ament_prefix_path.sh
+[0.486s] -- Up-to-date: /home/ori/my_ackermann/install/rc_car/share/rc_car/environment/ament_prefix_path.dsv
+[0.486s] -- Up-to-date: /home/ori/my_ackermann/install/rc_car/share/rc_car/environment/path.sh
+[0.486s] -- Up-to-date: /home/ori/my_ackermann/install/rc_car/share/rc_car/environment/path.dsv
+[0.486s] -- Up-to-date: /home/ori/my_ackermann/install/rc_car/share/rc_car/local_setup.bash
+[0.486s] -- Up-to-date: /home/ori/my_ackermann/install/rc_car/share/rc_car/local_setup.sh
+[0.486s] -- Up-to-date: /home/ori/my_ackermann/install/rc_car/share/rc_car/local_setup.zsh
+[0.487s] -- Up-to-date: /home/ori/my_ackermann/install/rc_car/share/rc_car/local_setup.dsv
+[0.487s] -- Installing: /home/ori/my_ackermann/install/rc_car/share/rc_car/package.dsv
+[0.487s] -- Up-to-date: /home/ori/my_ackermann/install/rc_car/share/ament_index/resource_index/packages/rc_car
+[0.488s] -- Up-to-date: /home/ori/my_ackermann/install/rc_car/share/rc_car/cmake/rc_carConfig.cmake
+[0.488s] -- Up-to-date: /home/ori/my_ackermann/install/rc_car/share/rc_car/cmake/rc_carConfig-version.cmake
+[0.488s] -- Up-to-date: /home/ori/my_ackermann/install/rc_car/share/rc_car/package.xml
+[0.489s] Invoked command in '/home/ori/my_ackermann/build/rc_car' returned '0': CMAKE_PREFIX_PATH=${CMAKE_PREFIX_PATH}:/opt/ros/humble /usr/bin/cmake --install /home/ori/my_ackermann/build/rc_car

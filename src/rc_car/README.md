@@ -22,7 +22,9 @@ sudo apt install ros-humble-slam-toolbox
 
 sudo apt install ros-humble-navigation2 ros-humble-nav2-bringup ros-humble-turtlebot3*
 
-sudo apt install ros-humble-twist-mux
+sudo apt install ros-humble-twist-mux 
+
+sudo apt install ros-humble-twist-stamper
 
 
 ----------Launch sim--------------

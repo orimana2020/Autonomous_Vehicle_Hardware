@@ -1,0 +1,11 @@
+/home/ori/my_ackermann/build/rc_car/CMakeFiles/uninstall.dir
+/home/ori/my_ackermann/build/rc_car/CMakeFiles/rc_car_uninstall.dir
+/home/ori/my_ackermann/build/rc_car/CMakeFiles/ament_cmake_python_copy_rc_car.dir
+/home/ori/my_ackermann/build/rc_car/CMakeFiles/ament_cmake_python_build_rc_car_egg.dir
+/home/ori/my_ackermann/build/rc_car/CMakeFiles/test.dir
+/home/ori/my_ackermann/build/rc_car/CMakeFiles/edit_cache.dir
+/home/ori/my_ackermann/build/rc_car/CMakeFiles/rebuild_cache.dir
+/home/ori/my_ackermann/build/rc_car/CMakeFiles/list_install_components.dir
+/home/ori/my_ackermann/build/rc_car/CMakeFiles/install.dir
+/home/ori/my_ackermann/build/rc_car/CMakeFiles/install/local.dir
+/home/ori/my_ackermann/build/rc_car/CMakeFiles/install/strip.dir
