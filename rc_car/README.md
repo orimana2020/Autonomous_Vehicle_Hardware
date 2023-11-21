@@ -124,7 +124,7 @@ Low level
 serial over usb:
 sudo apt install python3-serial / sudo pip install pyserial
 sudo apt install libserial-dev
-
+sudo adduser $USER dialout
 
 
 arduino ros bridge:
@@ -178,3 +178,12 @@ ros2 launch rc_car navigation_launch.py use_sim_time:=true map_subscribe_transie
 
 step 1:add map
 step 2: topic: /global_costmap, color scheme: cost_map
+
+
+
+---------------------------
+burn to arduino: https://github.com/joshnewans/ros_arduino_bridge.git
+
+download to src file at the PI:
+https://github.com/joshnewans/diffdrive_arduino/tree/humble
+https://github.com/joshnewans/serial

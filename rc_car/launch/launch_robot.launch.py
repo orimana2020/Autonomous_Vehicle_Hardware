@@ -1,22 +1,14 @@
 import os
-
 from ament_index_python.packages import get_package_share_directory
-
-
 from launch import LaunchDescription
 from launch.actions import IncludeLaunchDescription, TimerAction
 from launch.launch_description_sources import PythonLaunchDescriptionSource
 from launch.substitutions import Command
 from launch.actions import RegisterEventHandler
 from launch.event_handlers import OnProcessStart
-
 from launch_ros.actions import Node
 
-
-
 def generate_launch_description():
-
-
     # Include the robot_state_publisher launch file, provided by our own package. Force sim time to be enabled
     # !!! MAKE SURE YOU SET THE PACKAGE NAME CORRECTLY !!!
 
@@ -39,19 +31,24 @@ def generate_launch_description():
     twist_mux = Node(
             package="twist_mux",
             executable="twist_mux",
-            parameters=[twist_mux_params],
-            remappings=[('/cmd_vel_out','/diff_cont/cmd_vel_unstamped')]
-        )
+            parameters=[twist_mux_params, {'use_sim_time': False}],
+            )
+
+    # twist_stamper = Node(
+    #     package='twist_stamper',
+    #     executable='twist_stamper',
+    #     parameters=[{'use_sim_time': False}],
+    #     remappings=[('/cmd_vel_in','/cmd_vel_out'),
+    #                 ('/cmd_vel_out','/diff_cont/reference')]
+    #     )
 
     
 
-    # contations the robot interfaces
+    # ask the robot_state_publisher node to return its robot_description parameter as string
     robot_description = Command(['ros2 param get --hide-type /robot_state_publisher robot_description'])
-
-    # set the controller type
     controller_params_file = os.path.join(get_package_share_directory(package_name),'config','bicycle_steering_controller.yaml')
-
-    controller_manager = Node(
+    # we supply this node the urdf for the hardware interface and the yaml file for specifing the controller type
+    controller_manager = Node( 
         package="controller_manager",
         executable="ros2_control_node",
         parameters=[{'robot_description': robot_description},
@@ -110,6 +107,7 @@ def generate_launch_description():
         rsp,
         # joystick,
         twist_mux,
+        # twist_stamper,
         delayed_controller_manager,
         delayed_diff_drive_spawner,
         delayed_joint_broad_spawner

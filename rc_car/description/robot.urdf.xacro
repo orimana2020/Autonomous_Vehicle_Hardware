@@ -7,9 +7,12 @@
     <xacro:include filename="Traxxes_2DOF.xacro" />
     <xacro:include filename="ros2_control_bicycle.xacro" />
     <xacro:include filename="lidar.xacro" />
-    <xacro:include filename="camera.xacro" />
-    <xacro:include filename="imu.xacro"/>
-    <xacro:include filename="ground_truth.xacro"/>
+    <xacro:if value="$(arg sim_mode)">
+        <xacro:include filename="camera.xacro" />
+        <xacro:include filename="imu.xacro"/>
+        <xacro:include filename="ground_truth.xacro"/>
+    </xacro:if>
+    
     <!-- <xacro:include filename="depth_camera.xacro" /> -->
     <!-- <xacro:include filename="face.xacro" /> -->
     <!-- <xacro:if value="$(arg use_ros2_control)"> -->

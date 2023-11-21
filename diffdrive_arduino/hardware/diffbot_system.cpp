@@ -12,9 +12,6 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
-
-// connect to hardaware, disconnect from hardware, write to hardware, read from hardware
-
 #include "diffdrive_arduino/diffbot_system.hpp"
 
 #include <chrono>
@@ -39,8 +36,8 @@ hardware_interface::CallbackReturn DiffDriveArduinoHardware::on_init(
   }
 
 
-  cfg_.left_wheel_name = info_.hardware_parameters["left_wheel_name"];
-  cfg_.right_wheel_name = info_.hardware_parameters["right_wheel_name"];
+  cfg_.rear_wheel_name = info_.hardware_parameters["rear_wheel_name"];
+  cfg_.front_wheel_name = info_.hardware_parameters["front_wheel_name"];
   cfg_.loop_rate = std::stof(info_.hardware_parameters["loop_rate"]);
   cfg_.device = info_.hardware_parameters["device"];
   cfg_.baud_rate = std::stoi(info_.hardware_parameters["baud_rate"]);
@@ -59,8 +56,8 @@ hardware_interface::CallbackReturn DiffDriveArduinoHardware::on_init(
   }
   
 
-  wheel_l_.setup(cfg_.left_wheel_name, cfg_.enc_counts_per_rev);
-  wheel_r_.setup(cfg_.right_wheel_name, cfg_.enc_counts_per_rev);
+  wheel_l_.setup(cfg_.rear_wheel_name, cfg_.enc_counts_per_rev);
+  wheel_r_.setup(cfg_.front_wheel_name, cfg_.enc_counts_per_rev);
 
 
   for (const hardware_interface::ComponentInfo & joint : info_.joints)

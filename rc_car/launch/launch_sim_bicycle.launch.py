@@ -55,7 +55,7 @@ def generate_launch_description():
                         arguments=['-topic', 'robot_description','-entity', 'rc_car'], output='screen')
     
 
-    diff_drive_spawner = Node(
+    diff_drive_spawner = Node( # spawn the controller
         package="controller_manager",
         executable="spawner",
         arguments=["diff_cont"],
