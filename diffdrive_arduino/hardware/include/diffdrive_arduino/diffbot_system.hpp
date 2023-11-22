@@ -34,6 +34,8 @@
 #include "diffdrive_arduino/arduino_comms.hpp"
 #include "diffdrive_arduino/wheel.hpp"
 
+
+
 namespace diffdrive_arduino
 {
 class DiffDriveArduinoHardware : public hardware_interface::SystemInterface
@@ -97,8 +99,8 @@ private:
 
   ArduinoComms comms_;
   Config cfg_;
-  Wheel wheel_l_;
-  Wheel wheel_r_;
+  Wheel rear_wheel_;
+  Wheel front_wheel_;
 };
 
 }  // namespace diffdrive_arduino

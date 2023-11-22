@@ -20,11 +20,11 @@ def generate_launch_description():
                 )]), launch_arguments={'use_sim_time': 'false', 'use_ros2_control': 'true'}.items()
     )
 
-    # joystick = IncludeLaunchDescription(
-    #             PythonLaunchDescriptionSource([os.path.join(
-    #                 get_package_share_directory(package_name),'launch','joystick.launch.py'
-    #             )])
-    # )
+    joystick = IncludeLaunchDescription(
+                PythonLaunchDescriptionSource([os.path.join(
+                    get_package_share_directory(package_name),'launch','joystick.launch.py'
+                )])
+    )
 
 
     twist_mux_params = os.path.join(get_package_share_directory(package_name),'config','twist_mux.yaml')
@@ -34,13 +34,13 @@ def generate_launch_description():
             parameters=[twist_mux_params, {'use_sim_time': False}],
             )
 
-    # twist_stamper = Node(
-    #     package='twist_stamper',
-    #     executable='twist_stamper',
-    #     parameters=[{'use_sim_time': False}],
-    #     remappings=[('/cmd_vel_in','/cmd_vel_out'),
-    #                 ('/cmd_vel_out','/diff_cont/reference')]
-    #     )
+    twist_stamper = Node(
+        package='twist_stamper',
+        executable='twist_stamper',
+        parameters=[{'use_sim_time': False}],
+        remappings=[('/cmd_vel_in','/cmd_vel_out'),
+                    ('/cmd_vel_out','/diff_cont/reference')]
+        )
 
     
 
@@ -105,9 +105,9 @@ def generate_launch_description():
     # Launch them all!
     return LaunchDescription([
         rsp,
-        # joystick,
+        joystick,
         twist_mux,
-        # twist_stamper,
+        twist_stamper,
         delayed_controller_manager,
         delayed_diff_drive_spawner,
         delayed_joint_broad_spawner
