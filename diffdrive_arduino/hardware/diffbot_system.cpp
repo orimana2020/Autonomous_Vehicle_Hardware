@@ -269,8 +269,9 @@ hardware_interface::return_type diffdrive_arduino ::DiffDriveArduinoHardware::wr
   }
 
   int rear_wheel_counts_per_loop = rear_wheel_.cmd / rear_wheel_.rads_per_count / cfg_.loop_rate;
-  int front_wheel_counts_per_loop = front_wheel_.cmd / front_wheel_.rads_per_count / cfg_.loop_rate; // update me - ori
-  comms_.set_motor_values(rear_wheel_counts_per_loop, front_wheel_counts_per_loop);
+  int front_steer_command = front_wheel_.cmd * 50 ;//* cfg_.loop_rate; // update me - ori
+  comms_.set_motor_values(rear_wheel_counts_per_loop);
+  comms_.set_servo_values(front_steer_command);
   return hardware_interface::return_type::OK;
 }
 
