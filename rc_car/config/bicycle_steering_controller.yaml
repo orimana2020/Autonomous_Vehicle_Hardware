@@ -40,11 +40,8 @@ diff_cont:
     rear_wheel_radius: 0.056
     # front_wheel_track: 0.25
     # rear_wheel_track: 0.25
-    
-    # front_wheels_radius: 0.056
-    # rear_wheels_radius: 0.056
     # max_steering_speed: 1.0
-    # max_steering_angle: 0.42
+    # max_steering_angle: 0.9
 
     # pose_covariance_diagonal : [0.001, 0.001, 1000000.0, 1000000.0, 1000000.0, 1000.0]
     # twist_covariance_diagonal: [0.001, 0.001, 1000000.0, 1000000.0, 1000000.0, 1000.0]

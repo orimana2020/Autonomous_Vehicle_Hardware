@@ -18,7 +18,8 @@
                 <param name="device">/dev/ttyACM1</param>
                 <param name="baud_rate">57600</param>
                 <param name="timeout_ms">1000</param>
-                <param name="enc_counts_per_rev">3450</param>
+                <!-- how many ticks the encoder should count such that the output wheel completes full round -->
+                <param name="enc_counts_per_rev">3450</param> 
             </hardware>
             <joint name="back_central_wheel_joint">
                 <command_interface name="velocity">

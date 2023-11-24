@@ -255,7 +255,7 @@ hardware_interface::return_type DiffDriveArduinoHardware::read(
   rear_wheel_.vel = (rear_wheel_.pos - pos_prev) / delta_seconds;
 
   // front_wheel_.pos = front_wheel_.calc_enc_angle();
-  front_wheel_.pos = front_wheel_.cmd; // front wheel is open loop!
+  front_wheel_.pos = front_wheel_.cmd; // front wheel is open loop! normilize pi/2 
 
   return hardware_interface::return_type::OK;
 }
