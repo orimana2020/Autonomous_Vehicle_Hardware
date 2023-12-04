@@ -22,7 +22,7 @@ teleop_node:
     scale_angular_turbo.pitch: 0.0
     scale_angular_turbo.roll: 0.0
     scale_angular_turbo.yaw: 0.0
-    scale_linear.x: 0.06
+    scale_linear.x: 1.0
     scale_linear.y: 0.0
     scale_linear.z: 0.0
     scale_linear_turbo.x: 1.0

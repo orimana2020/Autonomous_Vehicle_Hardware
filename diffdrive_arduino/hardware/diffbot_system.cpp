@@ -245,12 +245,13 @@ hardware_interface::return_type DiffDriveArduinoHardware::read(
   {
     return hardware_interface::return_type::ERROR;
   }
+  double pos_prev = rear_wheel_.pos;
+
 
   comms_.read_encoder_values(rear_wheel_.enc, front_wheel_.enc);
 
   double delta_seconds = period.seconds();
 
-  double pos_prev = rear_wheel_.pos;
   rear_wheel_.pos = rear_wheel_.calc_enc_angle();
   rear_wheel_.vel = (rear_wheel_.pos - pos_prev) / delta_seconds;
 
@@ -268,7 +269,9 @@ hardware_interface::return_type diffdrive_arduino ::DiffDriveArduinoHardware::wr
     return hardware_interface::return_type::ERROR;
   }
 
-  int rear_wheel_counts_per_loop = rear_wheel_.cmd / rear_wheel_.rads_per_count / cfg_.loop_rate;
+  // int rear_wheel_counts_per_loop = rear_wheel_.cmd / rear_wheel_.rads_per_count / cfg_.loop_rate;
+  // rear_wheel_.cmd -> [rad per sec]
+  int rear_wheel_counts_per_loop = rear_wheel_.cmd / rear_wheel_.rads_per_count ;
   int front_steer_command = front_wheel_.cmd * 50 ;//* cfg_.loop_rate; // update me - ori
   comms_.set_motor_values(rear_wheel_counts_per_loop);
   comms_.set_servo_values(front_steer_command);
