@@ -3,7 +3,7 @@
 
 first install ros2 humble - see documentation 
 
-sudo apt install ros-humble-xacro ros-humble-joint-state-publisher-gui
+sudo apt install ros-humble-xacro ros-humble-joint-state-publisher-gui ros-humble-joint-state-publisher
 
 git clone -b humble https://github.com/joshnewans/rc_car.git
 

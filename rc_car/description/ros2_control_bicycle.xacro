@@ -15,6 +15,7 @@
                 <param name="rear_wheel_name">back_central_wheel_joint</param>
                 <param name="front_wheel_name">front_central_steer_joint</param>
                 <param name="loop_rate">30</param>
+                <!-- <param name="device">/dev/ttyACM0</param> -->
                 <param name="device">/dev/ttyACM0</param>
                 <param name="baud_rate">57600</param>
                 <param name="timeout_ms">1000</param>
