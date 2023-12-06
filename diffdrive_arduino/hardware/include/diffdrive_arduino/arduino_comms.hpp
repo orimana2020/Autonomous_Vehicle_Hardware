@@ -97,19 +97,19 @@ public:
     val_2 = std::atoi(token_2.c_str());
   }
 
-  void set_motor_values(int val_1)
+  void set_motor_values(int val_1, int val_2)
   {
     std::stringstream ss;
-    ss << "m " << val_1 << "\r";
+    ss << "m " << val_1 << " " << val_2 << "\r";
     send_msg(ss.str());
   }
 
-  void set_servo_values(int val_1)
-  {
-    std::stringstream ss;
-    ss << "s " << val_1 << "\r";
-    send_msg(ss.str());
-  }
+  // void set_servo_values(int val_1)
+  // {
+  //   std::stringstream ss;
+  //   ss << "s " << val_1 << "\r";
+  //   send_msg(ss.str());
+  // }
 
   void set_pid_values(int k_p, int k_d, int k_i, int k_o)
   {

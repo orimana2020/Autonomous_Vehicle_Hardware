@@ -247,7 +247,6 @@ hardware_interface::return_type DiffDriveArduinoHardware::read(
   }
   double pos_prev = rear_wheel_.pos;
 
-
   comms_.read_encoder_values(rear_wheel_.enc, front_wheel_.enc);
 
   double delta_seconds = period.seconds();
@@ -268,16 +267,13 @@ hardware_interface::return_type diffdrive_arduino ::DiffDriveArduinoHardware::wr
   {
     return hardware_interface::return_type::ERROR;
   }
-
-  // int rear_wheel_counts_per_loop = rear_wheel_.cmd / rear_wheel_.rads_per_count / cfg_.loop_rate;
-  // rear_wheel_.cmd -> [rad per sec]
-  int rear_wheel_counts_per_loop = rear_wheel_.cmd / rear_wheel_.rads_per_count ; // target speed [rev / sec for the encoder]
-  int front_steer_command = front_wheel_.cmd * 50 ;//* cfg_.loop_rate; // update me - ori
-  comms_.set_motor_values(rear_wheel_counts_per_loop);
-  comms_.set_servo_values(front_steer_command);
+  // int rear_wheel_counts_per_loop = rear_wheel_.cmd / rear_wheel_.rads_per_count / cfg_.loop_rate; //used for regular pwm
+  int rear_wheel_counts_per_loop = rear_wheel_.cmd / rear_wheel_.rads_per_count ; // target speed [ticks / sec] for the encoder]
+  int front_steering_command = front_wheel_.cmd * 180.0 / 2.0 / M_PI ;//* cfg_.loop_rate; // update me - ori
+  comms_.set_motor_values(rear_wheel_counts_per_loop, front_steering_command);
   return hardware_interface::return_type::OK;
 }
-
+ 
 }  // namespace diffdrive_arduino
 
 #include "pluginlib/class_list_macros.hpp"
