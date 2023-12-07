@@ -52,6 +52,7 @@ install(
 # Install Python executables
 install(PROGRAMS
   scripts/odom_publisher_bicycle.py
+  scripts/teleop_joy_custom_ps4.py
   DESTINATION lib/${PROJECT_NAME}
 )
 

@@ -26,7 +26,6 @@ def generate_launch_description():
             package="twist_mux",
             executable="twist_mux",
             parameters=[twist_mux_params, {'use_sim_time': True}],
-            # remappings=[('/cmd_vel_out','/diff_cont/reference')] )
             )
 
     twist_stamper = Node(
