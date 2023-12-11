@@ -28,14 +28,14 @@ class InverseTwist(Node):
 
         self.wheel_radius = 0.056
         self.wheelbase = 0.3429
-        self.max_steering_angle = np.pi/2
+        self.max_steering_angle = 0.6 #  = 35[deg] * np.pi / 180
         max_linear_velocity = 2
         self.max_radial_velocity_rear_wheel = max_linear_velocity / self.wheel_radius 
 
     def feedback_callback_joy(self, joy_msg):
         enable = joy_msg.axes[2] # enable buttum
         if enable < 0:
-            rear_wheel_w, steering_angle  = self.mapping(joy_msg.axes[1], -joy_msg.axes[3])
+            rear_wheel_w, steering_angle  = self.mapping(joy_msg.axes[1], joy_msg.axes[3])
             cmd_vel = Twist()
             cmd_vel.linear.x = rear_wheel_w * self.wheel_radius * np.cos(steering_angle) 
             cmd_vel.linear.y = 0.0
