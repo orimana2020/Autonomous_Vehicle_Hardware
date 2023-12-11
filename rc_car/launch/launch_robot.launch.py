@@ -54,16 +54,16 @@ def generate_launch_description():
 
     delayed_controller_manager = TimerAction(period=3.0, actions=[controller_manager])
 
-    diff_drive_spawner = Node(
+    bicycle_drive_spawner = Node(
         package="controller_manager",
         executable="spawner",
         arguments=["diff_cont"],
     )
 
-    delayed_diff_drive_spawner = RegisterEventHandler(
+    delayed_bicycle_drive_spawner = RegisterEventHandler(
         event_handler=OnProcessStart(
             target_action=controller_manager,
-            on_start=[diff_drive_spawner],
+            on_start=[bicycle_drive_spawner],
         )
     )
 
@@ -87,15 +87,15 @@ def generate_launch_description():
     # from launch.actions import RegisterEventHandler
     # from launch.event_handlers import OnProcessExit
     #
-    # Then add the following below the current diff_drive_spawner
-    # delayed_diff_drive_spawner = RegisterEventHandler(
+    # Then add the following below the current bicycle_drive_spawner
+    # delayed_bicycle_drive_spawner = RegisterEventHandler(
     #     event_handler=OnProcessExit(
     #         target_action=spawn_entity,
-    #         on_exit=[diff_drive_spawner],
+    #         on_exit=[bicycle_drive_spawner],
     #     )
     # )
     #
-    # Replace the diff_drive_spawner in the final return with delayed_diff_drive_spawner
+    # Replace the bicycle_drive_spawner in the final return with delayed_bicycle_drive_spawner
 
 
 
@@ -106,6 +106,6 @@ def generate_launch_description():
         twist_mux,
         twist_stamper,
         delayed_controller_manager,
-        delayed_diff_drive_spawner,
+        delayed_bicycle_drive_spawner,
         delayed_joint_broad_spawner
     ])

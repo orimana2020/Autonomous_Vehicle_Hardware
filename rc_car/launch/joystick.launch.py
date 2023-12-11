@@ -24,11 +24,18 @@ def generate_launch_description():
     #         parameters=[joy_params, {'use_sim_time': use_sim_time}],
     #         remappings=[('/cmd_vel','/cmd_vel_joy')]
     #      )
+    # teleop_node = Node( 
+    #     package="rc_car",
+    #     executable="teleop_joy_custom_ps4.py",
+    #     name="teleop_node",
+    #     parameters=[joy_params, {'use_sim_time': use_sim_time}]
+    # )
+
     teleop_node = Node( 
         package="rc_car",
-        executable="teleop_joy_custom_ps4.py",
-        name="teleop_rc_car",
-        parameters=[{'use_sim_time': use_sim_time}]
+        executable="inverse_twist.py",
+        name="teleop_node",
+        parameters=[ {'use_sim_time': use_sim_time}]
     )
 
 

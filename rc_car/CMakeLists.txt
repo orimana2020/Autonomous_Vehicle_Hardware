@@ -53,6 +53,7 @@ install(
 install(PROGRAMS
   scripts/odom_publisher_bicycle.py
   scripts/teleop_joy_custom_ps4.py
+  scripts/inverse_twist.py
   DESTINATION lib/${PROJECT_NAME}
 )
 

@@ -32,8 +32,7 @@ class OdomPublisher(Node):
 
     def __init__(self):
         super().__init__('odom_publisher')
-        self.set_parameters([Parameter('use_sim_time', Parameter.Type.BOOL, True)])
-        self.axle_length = 0.25
+        # self.set_parameters([Parameter('use_sim_time', Parameter.Type.BOOL, True)])
         self.wheelbase_length = 0.3429
         self.wheel_radius = 0.056
         self.center_of_mass_offset = 0.0
@@ -66,16 +65,7 @@ class OdomPublisher(Node):
 
     def state_update(self, state: AckermannState, feedback: SteeringControllerStatus) -> AckermannState:
         """Calculate the next state based off the current state"""
-        # try:
-        #     msg.steering_angle = self.steer_angle
-        # except:
-        #     msg.steering_angle = 0.0
-        # try:
-        #     msg.left_wheel_speed = self.left_vel
-        #     msg.right_wheel_speed = self.rigth_vel
-        # except:
-        #     msg.left_wheel_speed = 0.0
-        #     msg.right_wheel_speed = 0.0
+      
         average_wheel_speed = state.track_wheel_speed
         linear_speed = average_wheel_speed * self.wheel_radius
         turn_radius = self.turn_radius(state.steering_angle)

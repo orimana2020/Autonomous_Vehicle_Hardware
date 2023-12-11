@@ -54,7 +54,7 @@ def generate_launch_description():
                         arguments=['-topic', 'robot_description','-entity', 'rc_car'], output='screen')
     
 
-    diff_drive_spawner = Node( # spawn the controller
+    bicycle_drive_spawner = Node( # spawn the controller
         package="controller_manager",
         executable="spawner",
         arguments=["diff_cont"],
@@ -71,7 +71,8 @@ def generate_launch_description():
     odom_computation = Node( 
         package="rc_car",
         executable="odom_publisher_bicycle.py",
-        name="compute_odom"
+        name="compute_odom",
+        parameters=[{'use_sim_time': True}]
     )
 
     default_rviz_config_path = os.path.join(get_package_share_directory(package_name), 'config/main.rviz')
@@ -115,7 +116,7 @@ def generate_launch_description():
         twist_stamper,
         gazebo,
         spawn_entity,
-        diff_drive_spawner,
+        bicycle_drive_spawner,
         joint_broad_spawner,
         odom_computation,
         rviz_node,
