@@ -267,9 +267,8 @@
     <parent link="chassis_link" />
     <child link="front_left_wheel" />
     <!-- <axis xyz="0 0 1" /> -->
-    <origin rpy="0 0 0" xyz="${wheelbase/2} ${track_width/2} 0" />
+    <origin rpy="${-pi/2} 0 0" xyz="${wheelbase/2} ${track_width/2} 0" />
   </joint>
-
 
   <!-- front_right -->
   <link name="front_right_wheel">
@@ -296,9 +295,9 @@
     <parent link="chassis_link" />
     <child link="front_right_wheel" />
     <!-- <axis xyz="0 0 -1" /> -->
-    <origin rpy="0 0 0" xyz="${wheelbase/2} -${track_width/2} 0" />
+    <origin rpy="${-pi/2} 0 0" xyz="${wheelbase/2} -${track_width/2} 0" />
   </joint>
-
+  
 
   <!-- Gazebo interface -->
   <gazebo reference="front_central_wheel">

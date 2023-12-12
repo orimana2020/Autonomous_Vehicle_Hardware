@@ -25,11 +25,11 @@ def generate_launch_description():
     # Create a robot_state_publisher node
     params = {'robot_description': robot_description_config, 'use_sim_time': use_sim_time}
 
-    # node_joint_state_publisher = Node( # not needed when use joint_broad ros2_control
-    #     package='joint_state_publisher',
-    #     executable='joint_state_publisher',
-    #     name='joint_state_publisher',
-    #     parameters=[params],)
+    node_joint_state_publisher = Node(
+        package='joint_state_publisher',
+        executable='joint_state_publisher',
+        name='joint_state_publisher',
+        parameters=[params],)
 
 
     node_robot_state_publisher = Node(
@@ -52,7 +52,6 @@ def generate_launch_description():
             default_value='true',
             description='Use ros2_control if true'),
         
-        # control_node,
-        # node_joint_state_publisher,
+        node_joint_state_publisher,
         node_robot_state_publisher,
     ])
