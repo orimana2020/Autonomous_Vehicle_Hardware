@@ -80,6 +80,13 @@ def generate_launch_description():
         )
     )
 
+    odom_computation = Node( 
+        package="rc_car",
+        executable="odom_publisher_bicycle.py",
+        name="compute_odom",
+        parameters=[{'use_sim_time': False}]
+    )
+
 
     # Code for delaying a node (I haven't tested how effective it is)
     # 
@@ -107,5 +114,6 @@ def generate_launch_description():
         twist_stamper,
         delayed_controller_manager,
         delayed_bicycle_drive_spawner,
-        delayed_joint_broad_spawner
+        delayed_joint_broad_spawner,
+        odom_computation,
     ])
