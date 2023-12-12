@@ -15,9 +15,9 @@ slam_toolbox:
     base_frame: base_footprint
     scan_topic: /scan
 
-    # mode: mapping
-    mode: localization 
-    map_file_name: /home/ori/my_ackerman/src/rc_car/maps/maze_1/maze1_map
+    mode: mapping
+    # mode: localization 
+    # map_file_name: /home/ori/my_ackerman/src/rc_car/maps/maze_1/maze1_map
     map_start_at_dock: true
 
     

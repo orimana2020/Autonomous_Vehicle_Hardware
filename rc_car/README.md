@@ -28,12 +28,20 @@ sudo apt install python3-serial
 sudo apt install libserial-dev
 sudo adduser $USER dialout
 
+setting up ssh:
+1. sudo apt install openssh-server
+2. service ssh status
+3. sudo ufw allow ssh
+4. ssh 127.0.0.1
+5. ip addr
+6. ssh robot1@172.20.10.5
+
+
+
 
 ----------Launch sim--------------
 terminal 1: gazebo
-ros2 launch rc_car launch_sim.launch.py world:=src/rc_car/worlds/obstacles.world
 ros2 launch rc_car launch_sim.launch.py world:=src/rc_car/worlds/maze1.world
-
 
 terminal 2: rviz
 ros2 run rviz2 rviz2 -d src/rc_car/config/main.rviz --ros-args -p use_sim_time:=true
@@ -57,64 +65,10 @@ this is not the same localization_launch from Nav2 package(in this repo)
 -----------------------------------------
 
 
-
---- gazebo + Rviz + localization + navigation -----
-from this point we dont use slam_toolbox - so the base map will not get updates.
-
----terminal 1---:
-ros2 launch rc_car launch_sim.launch.py world:=src/rc_car/worlds/maze1.world
-
----terminal 2---:
-ros2 run rviz2 rviz2 -d src/rc_car/config/main.rviz --ros-args -p use_sim_time:=true
-
----terminal 3---:
-ros2 launch rc_car localization_launch.py map:=./src/rc_car/maps/maze_1/maze1_map.yaml use_sim_time:=true
-
-step 1: in rviz, manually write "map" in fixed frame
-step 2: change set initial position
-step 3: add map
-step 4: topic->durability policy->transient local
-
----terminal 4---:
-ros2 launch rc_car navigation_launch.py use_sim_time:=true map_subscribe_transient_local:=true
-
-step 1:add map
-step 2: topic: /global_costmap, color scheme: cost_map
-
-
------------------------------------
-
-REAL ROBOT
-
-download imager to burn OS to PI
-download ubuntu mate for PI 64 from https://ubuntu-mate.org/download/
-
-
-* CRITICAL*
-after installtion update TIME and DATE before sudo apt update and upgrade
-
-install ros:https://docs.ros.org/en/humble/Installation/Ubuntu-Install-Debians.html
-        -> skip: set locale
-        -> setup sources
-        -> install ros2 packages , desktop version
-
-
-
-setting up ssh:
-1. sudo apt install openssh-server
-2. service ssh status
-3. sudo ufw allow ssh
-4. ssh 127.0.0.1
-5. ip addr
-6. ssh robot1@172.20.10.5
-
-
-
-
 ------------ ROS BICYCLE SIMULATION ------------------
 
 TERMINAL 1 :
-ros2 launch rc_car launch_sim_bicycle.launch.py world:=src/rc_car/worlds/maze1.world
+ros2 launch rc_car launch_sim_bicycle.launch.py 
 
 TERMINAL 2 :
 ros2 run rviz2 rviz2 -d src/rc_car/config/main.rviz --ros-args -p use_sim_time:=true
@@ -134,8 +88,23 @@ step 1:add map
 step 2: topic: /global_costmap, color scheme: cost_map
 
 
+# Real Robot
 
----------------------------
+ros2 launch rc_car launch_robot.launch.py
+ros2 launch rc_car rplidar.launch.py 
+
+mapping:
+ros2 launch rc_car online_async_launch.py use_sim_time:=false
+save the map with rviz, add new panel->slam tool box plugin, serialize the map
+
+localiztion:
+ros2 launch rc_car localization_launch.py map:=my_lab3.yaml use_sim_time:=false
+
+navigation:
+
+
+
+---------- General Notes ---------------------
 burn to arduino: https://github.com/joshnewans/ros_arduino_bridge.git
 
 download to src file at the PI:
@@ -166,3 +135,17 @@ https://github.com/joshnewans/ros_arduino_bridge.git
 
 add permission to arduino: not needed because of dialout
 sudo chmod a+rw /dev/ttyACM0
+
+
+REAL ROBOT NOTES
+download imager to burn OS to PI
+download ubuntu mate for PI 64 from https://ubuntu-mate.org/download/
+
+
+* CRITICAL*
+after installtion update TIME and DATE before sudo apt update and upgrade
+
+install ros:https://docs.ros.org/en/humble/Installation/Ubuntu-Install-Debians.html
+        -> skip: set locale
+        -> setup sources
+        -> install ros2 packages , desktop version
