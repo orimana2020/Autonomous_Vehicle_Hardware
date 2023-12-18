@@ -37,8 +37,8 @@ def generate_launch_description():
         
 
     # Set the path to the world file
-    # world_file_name = 'maze1.world'
-    world_file_name = 'wall_following.world'
+    world_file_name = 'maze1.world'
+    # world_file_name = 'wall_following.world'
     world_path = os.path.join(get_package_share_directory(package_name), 'worlds',world_file_name )
     gazebo_params_file = os.path.join(get_package_share_directory(package_name),'config','gazebo_params.yaml')
 

@@ -18,7 +18,7 @@ class PID(object):
         self.prev_time = current_time
     
     def pid_step(self, ref, current, time:Duration):
-        # self.error = current - ref
+        # self.error = current - ref 
         self.error = ref - current
         delta_t = (time - self.prev_time).to_msg()
         delta_t = delta_t.sec + delta_t.nanosec / 1e9
