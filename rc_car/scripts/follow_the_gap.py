@@ -17,7 +17,7 @@ class FollowTheGap(Node):
         self.create_subscription(LaserScan, '/scan', self.feedback_callback,10)
         self.publisher = self.create_publisher(Twist, '/cmd_vel', 10)
         
-        self.threshsold = 2 # [m]
+        
         self.wheel_radius = 0.056 # [m]
         self.wheelbase = 0.3429 # [m]
         self.car_width = 0.2 # [m]
@@ -26,13 +26,15 @@ class FollowTheGap(Node):
         self.max_steering_angle = 0.6 #  = 35[deg] * np.pi / 180
         max_linear_velocity = 2
         self.max_radial_velocity_rear_wheel = max_linear_velocity / self.wheel_radius 
+        self.laser_angular_range = 270
+        self.offset = int((360 - self.laser_angular_range) /2) 
+        self.threshsold = 2.5 # [m]
         
 
     def feedback_callback(self, msg:LaserScan):
-        disparities = []
         ranges = []
-        for i in range(180):
-            if msg.ranges[i+90] > self.threshsold: 
+        for i in range(self.laser_angular_range):
+            if msg.ranges[i+self.offset] > self.threshsold: 
                 ranges.append(1)
             else:
                 ranges.append(0)
@@ -40,7 +42,7 @@ class FollowTheGap(Node):
         i_start_count = 0
         counts = 0
         max_counts = 0
-        for i in range(180):
+        for i in range(self.laser_angular_range):
             if ranges[i] == 1:
                 if counts ==0:
                     i_start_count = i
@@ -50,7 +52,7 @@ class FollowTheGap(Node):
                     max_counts = counts
                     i_start_max_count = i_start_count 
                 counts = 0
-        direction = (-1* (90 - (i_start_max_count + max_counts / 2 ))) * np.pi/180
+        direction = (-1* (self.laser_angular_range/2 - (i_start_max_count + max_counts / 2 ))) * np.pi / 180
         self.publish_steering_cmd(steering_angle=direction)
         
    
