@@ -21,10 +21,11 @@ find_package(ament_cmake_python REQUIRED)
 find_package(rclcpp REQUIRED)
 find_package(rclpy REQUIRED)
 find_package(geometry_msgs REQUIRED)
+find_package(mocap_msgs REQUIRED)
 
+# add_executable(mocap_node rc_car/print_mocap.py)
+# ament_target_dependencies(rclpy geometry_msgs mocap_msgs)
 
-# add_executable(ackerman_feedback rc_car/ackerman_feedback_node.py)
-# ament_target_dependencies(ackerman_feedback rclpy geometry_msgs)
 
 # uncomment the following section in order to fill in
 # further dependencies manually.
@@ -56,6 +57,7 @@ install(PROGRAMS
   scripts/PID_wall_following.py
   scripts/follow_the_gap.py
   scripts/inverse_twist.py
+  scripts/print_mocap.py
   DESTINATION lib/${PROJECT_NAME}
 )
 
