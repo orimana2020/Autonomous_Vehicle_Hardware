@@ -75,7 +75,16 @@ step 1:add map
 step 2: topic: /global_costmap, color scheme: cost_map
 
 
-# Real Robot
+----------------------------- bicycle simulation with mapped environment
+
+ros2 launch rc_car launch_sim_bicycle.launch.py 
+ros2 launch rc_car localization_launch.py map:=./src/rc_car/maps/maze_1/maze1_map.yaml use_sim_time:=true
+ros2 run rviz2 rviz2 -d src/rc_car/rviz_config/rviz_map_maze1.rviz --ros-args -p use_sim_time:=true
+
+
+
+
+--------------------- Real Robot --------------------
 
 ros2 launch rc_car launch_robot.launch.py
 ros2 launch rc_car rplidar.launch.py 

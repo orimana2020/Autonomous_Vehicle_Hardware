@@ -46,7 +46,7 @@ ament_python_install_package(${PROJECT_NAME})
 
 
 install(
-  DIRECTORY config description launch worlds scripts 
+  DIRECTORY config description launch worlds scripts rviz_config
   DESTINATION share/${PROJECT_NAME}
 )
 

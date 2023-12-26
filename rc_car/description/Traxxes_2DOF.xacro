@@ -20,8 +20,8 @@
 
   <!-- Steering params -->
   <xacro:property name="steering_velocity" value="0.2" />
-  <xacro:property name="steering_upper_limit" value="0.7" />
-  <xacro:property name="steering_lower_limit" value="-0.7" />
+  <xacro:property name="steering_upper_limit" value="0.6" /> 
+  <xacro:property name="steering_lower_limit" value="-0.6" />
   <xacro:property name="steering_effort" value="1000.0" />
 
 

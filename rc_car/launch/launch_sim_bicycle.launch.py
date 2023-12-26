@@ -75,14 +75,15 @@ def generate_launch_description():
         parameters=[{'use_sim_time': True}]
     )
 
-    default_rviz_config_path = os.path.join(get_package_share_directory(package_name), 'config/main.rviz')
-    rviz_node = Node(
-        package='rviz2',
-        executable='rviz2',
-        name='rviz2',
-        output='screen',
-        arguments=['-d', LaunchConfiguration('rvizconfig')],
-    )
+    # default_rviz_config_path = os.path.join(get_package_share_directory(package_name), 'rviz_config/main.rviz')
+    # rviz_node = Node(
+    #     package='rviz2',
+    #     executable='rviz2',
+    #     name='rviz2',
+    #     output='screen',
+    #     arguments=['-d', LaunchConfiguration('rvizconfig')],
+    #     parameters=[{'use_sim_time': True}],
+    # )
 
 
 
@@ -105,8 +106,8 @@ def generate_launch_description():
 
     # Launch them all!
     return LaunchDescription([
-        DeclareLaunchArgument(name='rvizconfig', default_value=default_rviz_config_path,
-                                            description='Absolute path to rviz config file'),
+        # DeclareLaunchArgument(name='rvizconfig', default_value=default_rviz_config_path,
+        #                                     description='Absolute path to rviz config file'),
         DeclareLaunchArgument(name='world',default_value=world_path,
                                             description='Full path to the world model file to load'),
     
@@ -120,7 +121,7 @@ def generate_launch_description():
         bicycle_drive_spawner,
         joint_broad_spawner,
         odom_computation,
-        rviz_node,
+        # rviz_node,
         # robot_localization_node,
         
     ])
