@@ -11,7 +11,7 @@ def generate_launch_description():
     package_name='rc_car' 
 
 
-    default_rviz_config_path = os.path.join(get_package_share_directory(package_name), 'config/rviz_real_robot.rviz')
+    default_rviz_config_path = os.path.join(get_package_share_directory(package_name), 'rviz_config/rviz_real_robot.rviz')
     rviz_node = Node(
         package='rviz2',
         executable='rviz2',
