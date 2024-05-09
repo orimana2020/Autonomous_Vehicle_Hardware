@@ -28,7 +28,13 @@ ros2 launch rc_car online_async_launch.py use_sim_time:=false
 
 
 localiztion:
-ros2 launch rc_car localization_launch.py map:=my_lab3.yaml use_sim_time:=false
+source install/setup.bash
+ros2 launch rc_car localization.launch.py map:=./src/rc_car/maps/maze_1/maze1_map.yaml use_sim_time:=false
+1. in rviz, manually write "map" in fixed frame
+2. change set initial position
+3. add map
+4. topic->durability policy->transient local
+<!-- ros2 launch rc_car localization_launch.py map:=my_lab3.yaml use_sim_time:=false -->
 
 
 # ---------- General Notes ---------------------
