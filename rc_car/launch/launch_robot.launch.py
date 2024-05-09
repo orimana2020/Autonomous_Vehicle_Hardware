@@ -88,23 +88,6 @@ def generate_launch_description():
     )
 
 
-    # Code for delaying a node (I haven't tested how effective it is)
-    # 
-    # First add the below lines to imports
-    # from launch.actions import RegisterEventHandler
-    # from launch.event_handlers import OnProcessExit
-    #
-    # Then add the following below the current bicycle_drive_spawner
-    # delayed_bicycle_drive_spawner = RegisterEventHandler(
-    #     event_handler=OnProcessExit(
-    #         target_action=spawn_entity,
-    #         on_exit=[bicycle_drive_spawner],
-    #     )
-    # )
-    #
-    # Replace the bicycle_drive_spawner in the final return with delayed_bicycle_drive_spawner
-
-
 
     # Launch them all!
     return LaunchDescription([

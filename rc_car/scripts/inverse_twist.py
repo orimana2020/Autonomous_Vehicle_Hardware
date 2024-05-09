@@ -47,6 +47,8 @@ class InverseTwist(Node):
             self.publisher.publish(cmd_vel)
     
     def mapping(self, linear_velocity, steering_angle):
+        if not (-0.1<steering_angle<0.1) and -0.1<linear_velocity<0.1:
+            linear_velocity = 0.1 
         return linear_velocity * self.max_radial_velocity_rear_wheel, steering_angle * self.max_steering_angle
 
 

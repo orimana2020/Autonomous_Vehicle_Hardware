@@ -8,7 +8,7 @@ def generate_launch_description():
         package="rc_car",
         executable="PID_wall_following.py",
         name="wall_following",
-        parameters=[{'use_sim_time': True}]
+        parameters=[{'use_sim_time': False}]
     )
 
 
