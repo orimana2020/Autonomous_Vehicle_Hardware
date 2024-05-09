@@ -1,27 +1,44 @@
 # Autonomous Car
+* CRITICAL*
+after installtion update TIME and DATE before sudo apt update and upgrade
+
+# building:
+source /opt/ros/humble/setup.bash
+colocon build --symlink-install
+source install/setup.bash
+
+
+how to stop the lidar?
+ros2 launch rc_car rplidar.launch.py 
+ros2 service call /stop_motor std_srvs/srv/Empty "{}"
+ros2 service call /start_motor std_srvs/srv/Empty "{}"
+
 
 # --------------------- Real Robot --------------------
 
 ros2 launch rc_car launch_robot.launch.py
 ros2 launch rc_car rplidar.launch.py 
+ros2 launch rc_car rviz_real_robot.launch.py
 
 mapping:
 ros2 launch rc_car online_async_launch.py use_sim_time:=false
-save the map with rviz, add new panel->slam tool box plugin, serialize the map
+1. panels -> add new panel -> slam tool box plugin
+2. in rviz add map and set /map to topic, change durability policy TransientLocal
+2. save the map with rviz, serialize the map
+
 
 localiztion:
 ros2 launch rc_car localization_launch.py map:=my_lab3.yaml use_sim_time:=false
 
 
----------- General Notes ---------------------
+# ---------- General Notes ---------------------
 
 REAL ROBOT NOTES
 download imager to burn OS to PI
 download ubuntu mate for PI 64 from https://ubuntu-mate.org/download/
 
 
-* CRITICAL*
-after installtion update TIME and DATE before sudo apt update and upgrade
+
 
 install ros:https://docs.ros.org/en/humble/Installation/Ubuntu-Install-Debians.html
         -> skip: set locale
@@ -38,7 +55,6 @@ sudo apt install ros-humble-slam-toolbox
 sudo apt install ros-humble-navigation2 ros-humble-nav2-bringup ros-humble-turtlebot3*
 sudo apt install ros-humble-twist-mux 
 sudo apt install ros-humble-twist-stamper
-git clone -b humble https://github.com/ros-controls/gazebo_ros2_control
 sudo apt-get install python3-pip
 pip install setuptools==58.2.0
 sudo apt install python3-serial 
