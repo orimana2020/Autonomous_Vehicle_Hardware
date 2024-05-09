@@ -20,7 +20,7 @@ def generate_launch_description():
 
     teleop_node = Node( 
         package="rc_car",
-        executable="inverse_twist.py",
+        executable="joy_to_cmdvel.py",
         name="teleop_node",
         parameters=[ {'use_sim_time': use_sim_time}]
     )

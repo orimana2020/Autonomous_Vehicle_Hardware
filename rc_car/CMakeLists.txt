@@ -55,7 +55,7 @@ install(PROGRAMS
   scripts/odom_publisher_bicycle.py
   scripts/PID_wall_following.py
   scripts/follow_the_gap.py
-  scripts/inverse_twist.py
+  scripts/joy_to_cmdvel.py
   scripts/print_mocap.py
   DESTINATION lib/${PROJECT_NAME}
 )

@@ -14,15 +14,6 @@ class InverseTwist(Node):
     '''
     def __init__(self):
         super().__init__('inverse_twist')
-        # self.declare_parameters(namespace='',
-        #                         parameters=[
-        #                                     ('max_linear_velocity', 1.0),
-        #                                     ('max_angular_velocity', 1.0),
-        #                                     ])
-        # self.max_linear_velocity = self.get_parameter('max_linear_velocity').get_parameter_value().double_value
-        # self.max_angular_velocity = self.get_parameter('max_angular_velocity').get_parameter_value().double_value
-        
-        
         self.create_subscription(Joy, '/joy',self.feedback_callback_joy,10)
         self.publisher = self.create_publisher(Twist, '/cmd_vel_joy_inverse', 10)
 
