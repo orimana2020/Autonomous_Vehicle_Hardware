@@ -34,13 +34,13 @@ class PathTracking(Node):
 
         #  hyper-parameters
         k = 0.1  # look forward gain
-        Lfc = 1.0  # [m] look-ahead distance
+        Lfc = 0.7  # [m] look-ahead distance
         Kp = 1.0  # speed proportional gain
         self.TargetSpeed = 0.9  # [m/s]
         self.MAX_STEER = np.deg2rad(35.0)  # maximum steering angle [rad]
         MAX_DSTEER = np.deg2rad(150.0)  # maximum steering speed [rad/s]
-        self.MAX_SPEED = 2.0 # maximum speed [m/s]
-        self.MIN_SPEED = 1.0  # minimum speed [m/s]
+        self.MAX_SPEED = 1.5 # maximum speed [m/s]
+        self.MIN_SPEED = 0.7  # minimum speed [m/s]
         MAX_ACCEL = 1.0  # maximum accel [m/ss]
         self.wheel_radius = 0.056
         self.WB = 0.335
