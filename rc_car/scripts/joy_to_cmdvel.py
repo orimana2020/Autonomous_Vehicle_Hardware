@@ -18,7 +18,7 @@ class InverseTwist(Node):
         self.publisher = self.create_publisher(Twist, '/cmd_vel_joy_inverse', 10)
 
         self.wheel_radius = 0.056
-        self.wheelbase = 0.3429
+        self.wheelbase = 0.335
         # if max_steering_angle changed the value in ROS_ARDUINO_BRIDGE must be changed too!
         self.max_steering_angle = 0.6 #  = 35[deg] * np.pi / 180
         max_linear_velocity = 2
@@ -35,6 +35,7 @@ class InverseTwist(Node):
             cmd_vel.angular.x = 0.0
             cmd_vel.angular.y = 0.0
             cmd_vel.angular.z = cmd_vel.linear.x * np.tan(steering_angle) / self.wheelbase
+            print(f'steering {np.rad2deg(steering_angle)}')
             self.publisher.publish(cmd_vel)
     
     def mapping(self, linear_velocity, steering_angle):

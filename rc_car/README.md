@@ -3,6 +3,7 @@
 after installtion update TIME and DATE before sudo apt update and upgrade
 
 # building:
+echo "source /opt/ros/humble/setup.bash" >> ~/.bashrc
 source /opt/ros/humble/setup.bash
 colocon build --symlink-install
 source install/setup.bash
@@ -16,8 +17,15 @@ ros2 service call /start_motor std_srvs/srv/Empty "{}"
 
 # --------------------- Real Robot --------------------
 
+ssh robot1@192.168.0.102
+cd car_hardware
+source /opt/ros/humble/setup.bash
+source install/setup.bash
+
 ros2 launch rc_car launch_robot.launch.py
 ros2 launch rc_car rplidar.launch.py 
+
+Rviz runs on remote computer and *NOT* via ssh!
 ros2 launch rc_car rviz_real_robot.launch.py
 
 mapping:
@@ -29,12 +37,20 @@ ros2 launch rc_car online_async_launch.py use_sim_time:=false
 
 localiztion:
 source install/setup.bash
-ros2 launch rc_car localization.launch.py map:=./src/rc_car/maps/maze_1/maze1_map.yaml use_sim_time:=false
+ros2 launch rc_car localization.launch.py map:=race4.yaml use_sim_time:=false
 1. in rviz, manually write "map" in fixed frame
 2. change set initial position
 3. add map
 4. topic->durability policy->transient local
 <!-- ros2 launch rc_car localization_launch.py map:=my_lab3.yaml use_sim_time:=false -->
+
+
+navigation:
+# path planning
+ros2 run rc_car PathPlanning_service.py --ros-args -p use_sime_time:=true
+ros2 run rc_car PathPlanning_client.py 0 0 6.22 -4.5  --ros-args -p use_sime_time:=true
+# path tracking
+ros2 run rc_car Path_Tracking.py --ros-args -p use_sime_time:=false -p show_path:=false -p show_marker:=false -p path_name:=path_race4
 
 
 # ---------- General Notes ---------------------
@@ -67,6 +83,14 @@ sudo apt install python3-serial
 sudo apt install libserial-dev
 sudo adduser $USER dialout
 
+sudo apt install net-tools
+wifi password: 90778049
+find robot ip:
+connect cobot to wifi
+ifconfig -a -> wlan -> inet
+or
+hostname -I
+
 setting up ssh:
 1. sudo apt install openssh-server
 2. service ssh status
@@ -74,6 +98,11 @@ setting up ssh:
 4. ssh 127.0.0.1
 5. ip addr
 6. ssh robot1@172.20.10.5
+
+ssh robot1@192.168.0.101
+cd car_hardware
+source /opt/ros/humble/setup.bash
+source install/setup.bash
 
 
 find path to some serial device:

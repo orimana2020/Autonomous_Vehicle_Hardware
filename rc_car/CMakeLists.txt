@@ -22,6 +22,7 @@ find_package(rclcpp REQUIRED)
 find_package(rclpy REQUIRED)
 find_package(geometry_msgs REQUIRED)
 find_package(mocap_msgs REQUIRED)
+find_package(interfaces REQUIRED)
 
 # add_executable(mocap_node rc_car/print_mocap.py)
 # ament_target_dependencies(rclpy geometry_msgs mocap_msgs)
@@ -46,7 +47,7 @@ ament_python_install_package(${PROJECT_NAME})
 
 
 install(
-  DIRECTORY config description launch worlds scripts rviz_config
+  DIRECTORY config description launch scripts rviz_config
   DESTINATION share/${PROJECT_NAME}
 )
 
@@ -57,6 +58,12 @@ install(PROGRAMS
   scripts/follow_the_gap.py
   scripts/joy_to_cmdvel.py
   scripts/print_mocap.py
+  scripts/AStar_python_interface.py
+  scripts/utils.py
+  scripts/Path_Tracking.py
+  scripts/PathPlanning_client.py
+  scripts/PathPlanning_service.py
+  scripts/PurePursuit_python_interface.py
   DESTINATION lib/${PROJECT_NAME}
 )
 

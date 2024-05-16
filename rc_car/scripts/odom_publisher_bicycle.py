@@ -32,18 +32,14 @@ class OdomPublisher(Node):
 
     def __init__(self):
         super().__init__('odom_publisher')
-        # self.set_parameters([Parameter('use_sim_time', Parameter.Type.BOOL, True)])
-        self.wheelbase_length = 0.3429
+        self.wheelbase_length = 0.335
         self.wheel_radius = 0.056
         self.center_of_mass_offset = 0.0
         self.damping_factor = 1.0
 
         # Publishers
         queue_size = 10
-        # msg_type = 'tf2_msgs'
-        # if msg_type == 'nav_msgs':
         self.publisher_odom = self.create_publisher(Odometry, 'odom', queue_size)
-        # elif msg_type == 'tf2_msgs':
         self.publisher_tf = self.create_publisher(TFMessage, 'tf', queue_size)
 
 
@@ -70,12 +66,9 @@ class OdomPublisher(Node):
         linear_speed = average_wheel_speed * self.wheel_radius
         turn_radius = self.turn_radius(state.steering_angle)
         angular_speed = linear_speed / turn_radius # This is zero if turn_radius is infinite
-
         feedback_time = rclpy.time.Time.from_msg(feedback.header.stamp)
         time_delta = (feedback_time - state.time).nanoseconds * 1e-9
-
         heading_delta = angular_speed * time_delta # This is zero if angular_speed is zero
-
         orientation_delta = Rotation.from_euler('xyz', [0, 0, heading_delta])
         if math.isfinite(turn_radius):
             lateral_delta = turn_radius * (1 - math.cos(heading_delta))
