@@ -14,6 +14,7 @@ from scipy.spatial.transform import Rotation
 from std_msgs.msg import Header
 from rclpy.parameter import Parameter
 from control_msgs.msg import SteeringControllerStatus
+import car_consts
 """
 subscribe to /diff_cont/controller_state [control_msgs/msg/SteeringControllerStatus], 
 calculate odometry, and publish to /odom and /tf
@@ -32,8 +33,8 @@ class OdomPublisher(Node):
 
     def __init__(self):
         super().__init__('odom_publisher')
-        self.wheelbase_length = 0.335
-        self.wheel_radius = 0.056
+        self.wheelbase_length = car_consts.wheelbase
+        self.wheel_radius = car_consts.wheel_radius
         self.center_of_mass_offset = 0.0
         self.damping_factor = 1.0
 

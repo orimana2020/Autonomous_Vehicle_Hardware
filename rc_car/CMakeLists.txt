@@ -60,10 +60,12 @@ install(PROGRAMS
   scripts/print_mocap.py
   scripts/AStar_python_interface.py
   scripts/utils.py
+  scripts/car_consts.py
   scripts/Path_Tracking.py
   scripts/PathPlanning_client.py
   scripts/PathPlanning_service.py
   scripts/PurePursuit_python_interface.py
+  scripts/circle_drive_steering_calibration.py
   DESTINATION lib/${PROJECT_NAME}
 )
 

@@ -6,7 +6,7 @@ from rclpy.node import Node
 from geometry_msgs.msg import Twist
 import numpy as np
 from builtin_interfaces.msg import Duration
-
+import car_consts
 
 
 
@@ -18,13 +18,13 @@ class FollowTheGap(Node):
         self.publisher = self.create_publisher(Twist, '/cmd_vel', 10)
         
         
-        self.wheel_radius = 0.056 # [m]
-        self.wheelbase = 0.3429 # [m]
-        self.car_width = 0.2 # [m]
+        self.wheel_radius = car_consts.wheel_radius # [m]
+        self.wheelbase = car_consts.wheelbase # [m]
+        self.car_width = car_consts.car_width # [m]
         self.eliminate_facetor = 1.5
         # if max_steering_angle changed the value in ROS_ARDUINO_BRIDGE must be changed too!
-        self.max_steering_angle = 0.6 #  = 35[deg] * np.pi / 180
-        max_linear_velocity = 2
+        self.max_steering_angle = car_consts.max_steering_angle_rad #  = 35[deg] * np.pi / 180
+        max_linear_velocity = car_consts.max_linear_velocity
         self.max_radial_velocity_rear_wheel = max_linear_velocity / self.wheel_radius 
         self.laser_angular_range = 270
         self.offset = int((360 - self.laser_angular_range) /2) 
