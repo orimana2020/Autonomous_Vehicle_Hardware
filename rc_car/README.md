@@ -25,8 +25,9 @@ source install/setup.bash
 ros2 launch rc_car launch_robot.launch.py
 ros2 launch rc_car rplidar.launch.py 
 
+Rviz:
 Rviz runs on remote computer and *NOT* via ssh!
-<!-- ros2 launch rc_car rviz_real_robot.launch.py -->
+ros2 run rviz2 rviz2 -d src/rc_car/rviz_config/localization.rviz --ros-args -p use_sim_time:=false
 
 mapping:
 ros2 launch rc_car online_async_launch.py use_sim_time:=false
@@ -44,9 +45,7 @@ ros2 launch rc_car localization.launch.py map:=race4.yaml use_sim_time:=false
 4. topic->durability policy->transient local
 <!-- ros2 launch rc_car localization_launch.py map:=my_lab3.yaml use_sim_time:=false -->
 
-Rviz:
-Rviz runs on remote computer and *NOT* via ssh!
-ros2 run rviz2 rviz2 -d src/rc_car/rviz_config/localization.rviz --ros-args -p use_sim_time:=false
+
 
 
 navigation:
