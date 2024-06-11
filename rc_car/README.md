@@ -48,6 +48,7 @@ ros2 launch rc_car localization.launch.py map:=race4.yaml use_sim_time:=false
 
 
 
+
 navigation:
 # path planning
 ros2 run rc_car PathPlanning_service.py --ros-args -p use_sime_time:=true
@@ -132,6 +133,10 @@ https://github.com/joshnewans/ros_arduino_bridge.git
 add permission to arduino: not needed because of dialout
 sudo chmod a+rw /dev/ttyACM0
 
+# low level calibration:
+1. drive the car stright, adjust the offset of the steering
+2. measure the turning radius and adjust the maximal steering angle 
+3. steering angle = atan(wheelbase/turning radius)
 
 
 ---- other--- can be ignored----
