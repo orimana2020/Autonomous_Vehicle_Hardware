@@ -1,0 +1,12 @@
+[0.013s] Invoking command in '/home/ori/Autonomous_Vehicle_Hardware/build/diffdrive_arduino': CMAKE_PREFIX_PATH=/opt/ros/humble /usr/bin/cmake --build /home/ori/Autonomous_Vehicle_Hardware/build/diffdrive_arduino -- -j20 -l20
+[0.045s] [ 50%] [32mBuilding CXX object CMakeFiles/diffdrive_arduino.dir/hardware/diffbot_system.cpp.o[0m
+[0.139s] In file included from [01m[K/home/ori/Autonomous_Vehicle_Hardware/src/diffdrive_arduino/hardware/include/diffdrive_arduino/diffbot_system.hpp:34[m[K,
+[0.139s]                  from [01m[K/home/ori/Autonomous_Vehicle_Hardware/src/diffdrive_arduino/hardware/diffbot_system.cpp:15[m[K:
+[0.139s] [01m[K/home/ori/Autonomous_Vehicle_Hardware/src/diffdrive_arduino/hardware/include/diffdrive_arduino/arduino_comms.hpp:7:10:[m[K [01;31m[Kfatal error: [m[Klibserial/SerialPort.h: No such file or directory
+[0.139s]     7 | #include [01;31m[K<libserial/SerialPort.h>[m[K
+[0.139s]       |          [01;31m[K^~~~~~~~~~~~~~~~~~~~~~~~[m[K
+[0.139s] compilation terminated.
+[0.140s] gmake[2]: *** [CMakeFiles/diffdrive_arduino.dir/build.make:76: CMakeFiles/diffdrive_arduino.dir/hardware/diffbot_system.cpp.o] Error 1
+[0.141s] gmake[1]: *** [CMakeFiles/Makefile2:137: CMakeFiles/diffdrive_arduino.dir/all] Error 2
+[0.141s] gmake: *** [Makefile:146: all] Error 2
+[0.142s] Invoked command in '/home/ori/Autonomous_Vehicle_Hardware/build/diffdrive_arduino' returned '2': CMAKE_PREFIX_PATH=/opt/ros/humble /usr/bin/cmake --build /home/ori/Autonomous_Vehicle_Hardware/build/diffdrive_arduino -- -j20 -l20

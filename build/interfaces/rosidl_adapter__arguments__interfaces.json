@@ -1,0 +1,6 @@
+{
+  "package_name": "interfaces",
+  "non_idl_tuples": [
+    "/home/ori/Autonomous_Vehicle_Hardware/src/interfaces:srv/GetPath.srv"
+  ]
+}

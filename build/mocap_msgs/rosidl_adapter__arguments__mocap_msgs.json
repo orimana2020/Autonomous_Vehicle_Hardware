@@ -1,0 +1,10 @@
+{
+  "package_name": "mocap_msgs",
+  "non_idl_tuples": [
+    "/home/ori/Autonomous_Vehicle_Hardware/src/mocap_msgs:msg/Marker.msg",
+    "/home/ori/Autonomous_Vehicle_Hardware/src/mocap_msgs:msg/Markers.msg",
+    "/home/ori/Autonomous_Vehicle_Hardware/src/mocap_msgs:msg/ImusInfo.msg",
+    "/home/ori/Autonomous_Vehicle_Hardware/src/mocap_msgs:msg/RigidBody.msg",
+    "/home/ori/Autonomous_Vehicle_Hardware/src/mocap_msgs:msg/RigidBodies.msg"
+  ]
+}
