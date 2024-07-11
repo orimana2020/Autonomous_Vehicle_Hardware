@@ -46,15 +46,12 @@ ros2 launch rc_car localization.launch.py map:=race4.yaml use_sim_time:=false
 <!-- ros2 launch rc_car localization_launch.py map:=my_lab3.yaml use_sim_time:=false -->
 
 
-
-
-
 navigation:
 # path planning
-ros2 run rc_car PathPlanning_service.py --ros-args -p map_name:=map_world -p use_sime_time:=true
-ros2 run rc_car PathPlanning_client.py 0 0 6.22 -4.5 path1  --ros-args -p use_sime_time:=true
+ros2 run rc_car PathPlanning_service_prm.py --ros-args -p map_name:=map_world -p use_sime_time:=false
+ros2 run rc_car PathPlanning_client.py 0 0 6.22 -4.5 path1  --ros-args -p use_sime_time:=false
 # path tracking
-ros2 run rc_car Path_Tracking.py --ros-args -p use_sime_time:=false -p show_path:=false -p show_marker:=false -p path_name:=path1
+ros2 run rc_car ros_Path_Tracking.py --ros-args -p use_sime_time:=false -p show_path:=true -p show_marker:=true -p path_name:=path1
 
 
 # ---------- General Notes ---------------------
@@ -80,14 +77,18 @@ pip install setuptools==58.2.0
 sudo apt install python3-serial 
 sudo apt install libserial-dev
 sudo apt install net-tools
+sudo apt install openssh-server
 
 sudo adduser $USER dialout
 wifi password: 90778049
 find robot ip:
-connect robot to wifi
-ifconfig -a -> wlan -> inet
+connect robot to wifi 
+on robot computer - ifconfig -a -> wlan -> inet
 or
 hostname -I
+or
+how to find robot ip - on robot computer ->wifi -> connection information
+
 
 setting up ssh:
 1. sudo apt install openssh-server
@@ -97,7 +98,8 @@ setting up ssh:
 5. ip addr
 6. ssh robot1@172.20.10.5
 
-ssh robot1@192.168.0.101
+
+ssh robot1@192.168.0.102
 cd car_hardware
 source /opt/ros/humble/setup.bash
 source install/setup.bash

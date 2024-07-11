@@ -60,10 +60,11 @@ class PurePersuit_Controller(object):
         # To speed up nearest point search, doing it at only first time.
         if self.old_nearest_point_index is None:
             # search nearest point index
-            dx = [state.rear_x - icx for icx in self.cx]
-            dy = [state.rear_y - icy for icy in self.cy]
-            d = np.hypot(dx, dy)
-            ind = np.argmin(d)
+            # dx = [state.rear_x - icx for icx in self.cx]
+            # dy = [state.rear_y - icy for icy in self.cy]
+            # d = np.hypot(dx, dy)
+            # ind = np.argmin(d)
+            ind = 0
             self.old_nearest_point_index = ind
         else:
             ind = self.old_nearest_point_index
@@ -111,9 +112,16 @@ def main():
     """
     load path and convert it to trajectory, smooth curve, 
     """
-    # path = np.load('path_meter_test.npy')
-    path = np.load('path_race4.npy')
-    trajectory = Trajectory(dl=0.5, path =path, TARGET_SPEED=target_speed)
+    path = np.load('path2_meter.npy')
+    # loops = 3
+    # looped_path = []
+    # for _ in range(loops):
+    #     for coords in path:
+    #         looped_path.append(coords)
+    # path = np.array(looped_path)
+
+    trajectory = Trajectory(dl=0.5, path=path, TARGET_SPEED=target_speed)
+    print(len(trajectory.cx))
     # initial state
     state = State(x=trajectory.cx[0], y=trajectory.cy[0], yaw=trajectory.cyaw[0], v=0.0)
     # initial yaw compensation
@@ -128,7 +136,7 @@ def main():
     pp = PurePersuit_Controller(trajectory.cx, trajectory.cy, k, Lfc, Kp, WB, MAX_ACCEL, MAX_SPEED, MIN_SPEED, MAX_STEER, MAX_DSTEER)
     target_ind, _ = pp.search_target_index(state)
     simulator = Simulator(trajectory, state)
-    while T >= time and lastIndex > target_ind:
+    while  lastIndex > target_ind: #T >= time and
         state.v = pp.proportional_control_acceleration(target_speed, state.v, dt)
         delta, target_ind,_,_ = pp.pure_pursuit_steer_control(state, trajectory, target_ind, dt)
         state.predelta = delta

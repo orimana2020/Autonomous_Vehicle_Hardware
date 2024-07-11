@@ -1,6 +1,11 @@
 import numpy as np
 import matplotlib.pyplot as plt
 from py_Utils import Tree,  CSpace
+from py_PurePursuit import PurePersuit_Controller
+from py_car_simulator import State, States, Simulator
+from py_Utils import Trajectory
+import py_car_consts
+import math
 plt.ion()
 
 class KINORRT(object):
@@ -168,30 +173,65 @@ class Odom(object):
         return new_state, edge, cost
 
 
-def preprocessmap(map_):
-    map_[10:40, 60] = 100
 
-    return map_  
 
 def main():
-    map_dict = np.load('mlrlab'+'.npy', allow_pickle=True)
+    map_dict = np.load('sim_map'+'.npy', allow_pickle=True)
     resolution =  map_dict.item().get('map_resolution')
     origin_x = map_dict.item().get('map_origin_x')
     origin_y = map_dict.item().get('map_origin_y')
     map_original = map_dict.item().get('map_data')
-    map_original = preprocessmap(map_original)
-    inflated_map = inflate(map_original, 0.2/resolution)
+    robot_radius = 0.25
+    inflated_map = inflate(map_original, robot_radius/resolution)
     converter = CSpace(resolution, origin_x=origin_x, origin_y=origin_y, map_shape=map_original.shape)
-    start=converter.meter2pixel([0.0,0.0])
-    # goal = converter.meter2pixel([-2, 0])
-    goal = converter.meter2pixel([6.22, -4.22])
-    print(start)
-    print(goal)
     kinorrt_planner = KINORRT(env_map=inflated_map, max_step_size=20, max_itr=10000, p_bias=0.05,converter=converter )
-    path, path_idx, cost = kinorrt_planner.find_path(start, goal)
-    print(f'cost: {cost}')
-    plotter = Plotter(inflated_map=inflated_map)
-    plotter.draw_tree(kinorrt_planner.tree, start, goal, path, path_idx)
+    # path, path_idx, cost = kinorrt_planner.find_path(start, goal)
+    # print(f'cost: {cost}')
+    # plotter = Plotter(inflated_map=inflated_map)
+    # plotter.draw_tree(kinorrt_planner.tree, start, goal, path, path_idx)
+
+
+    # PP
+    #  hyper-parameters
+    k = 0.1  # look forward gain
+    Lfc = 1.0  # [m] look-ahead distance
+    Kp = 1.0  # speed proportional gain
+    dt = 0.1  # [s] time tick
+    WB = py_car_consts.wheelbase 
+    target_speed = 1.0  # [m/s]
+    T = 100.0  # max simulation time
+    MAX_STEER = py_car_consts.max_steering_angle_rad  # maximum steering angle [rad]
+    MAX_DSTEER = py_car_consts.max_dt_steering_angle  # maximum steering speed [rad/s]
+    MAX_SPEED = py_car_consts.max_linear_velocity  # maximum speed [m/s]
+    MIN_SPEED = py_car_consts.min_linear_velocity  # minimum speed [m/s]
+    MAX_ACCEL = 1.0  # maximum accel [m/ss]
+
+    """
+    load path and convert it to trajectory, smooth curve, 
+    """
+    path = np.load('path3_meter.npy')
+    trajectory = Trajectory(dl=0.5, path=path, TARGET_SPEED=target_speed)
+    state = State(x=trajectory.cx[0], y=trajectory.cy[0], yaw=trajectory.cyaw[0], v=0.0) # initial state
+    if state.yaw - trajectory.cyaw[0] >= math.pi: # initial yaw compensation
+        state.yaw -= math.pi * 2.0
+    elif state.yaw - trajectory.cyaw[0] <= -math.pi:
+        state.yaw += math.pi * 2.0
+    lastIndex = len(trajectory.cx) - 1
+    time = 0.0
+    states = States()
+    states.append(time, state)
+    pp = PurePersuit_Controller(trajectory.cx, trajectory.cy, k, Lfc, Kp, WB, MAX_ACCEL, MAX_SPEED, MIN_SPEED, MAX_STEER, MAX_DSTEER)
+    target_ind, _ = pp.search_target_index(state)
+    simulator = Simulator(trajectory, state)
+    while  lastIndex > target_ind: #T >= time and
+        state.v = pp.proportional_control_acceleration(target_speed, state.v, dt)
+        delta, target_ind,_,_ = pp.pure_pursuit_steer_control(state, trajectory, target_ind, dt)
+        state.predelta = delta
+        simulator.update_state(state, delta)  # Control vehicle
+        time += dt
+        states.append(time, state, delta)
+    simulator.show_simulation(states)
+
     
 
 

@@ -1,7 +1,6 @@
 import numpy as np
 import matplotlib.pyplot as plt
-from py_Utils import Tree, calc_configs_dist, Trajectory
-from rc_car.scripts.py_AStar import CSpace
+from py_Utils import Tree, calc_configs_dist, Trajectory, CSpace
 plt.ion()
 
 class RRTSTAR(object):
@@ -207,16 +206,14 @@ def inflate(map_, inflation):#, resolution, distance):
 
 
 def main():
-    map_original = np.array(np.load('maze_test.npy'), dtype=int)
-    env_rows, env_cols = map_original.shape
-    resolution=0.05000000074505806
-    origin_x=-4.73 
-    origin_y=-5.66
-    converter = CSpace(resolution, origin_x, origin_y,env_rows, env_cols )
-
-    # map_ = np.array(np.load('maze_1.npy'), dtype=int)
-    map_original = np.array(np.load('maze_test.npy'), dtype=int)
-    map_ = inflate(map_original, 0.4/resolution)
+    map_dict = np.load('sim_map'+'.npy', allow_pickle=True)
+    resolution =  map_dict.item().get('map_resolution')
+    origin_x = map_dict.item().get('map_origin_x')
+    origin_y = map_dict.item().get('map_origin_y')
+    map_original = map_dict.item().get('map_data')
+    converter = CSpace(resolution, origin_x, origin_y, map_original.shape)
+    robot_radius = 0.4
+    map_ = inflate(map_original, robot_radius/resolution)
     start=converter.meter2pixel([0.0,0.0])
     goal = converter.meter2pixel([6.22, -4.22])
     start = np.array([start[0], start[1], 0.0], dtype= int)
@@ -224,8 +221,6 @@ def main():
     print(start)
     print(goal)
     rrt_planner = RRTSTAR(env_map=map_, max_step_size=20, max_itr=15000, stop_on_goal=True, p_bias=0.05, show_animation=False)
-    # rrt_planner.draw_paths(22)
-    # path = np.load('path1.npy')
     path, cost = rrt_planner.find_path(start, goal)
     trajectory = Trajectory(dl=0.5, path = path, TARGET_SPEED=1.0)
     

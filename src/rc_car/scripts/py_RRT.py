@@ -1,6 +1,7 @@
 import numpy as np
 import matplotlib.pyplot as plt
 from py_Utils import Tree, calc_configs_dist, Trajectory, CSpace
+import time
 
 plt.ion()
 
@@ -207,11 +208,16 @@ def inflate(map_, inflation):#, resolution, distance):
 
 
 def main():
-    map_original = np.array(np.load('maze_test.npy'), dtype=int)
-    resolution=0.05000000074505806
+    start_time = time.time()
+    map_dict = np.load('sim_map'+'.npy', allow_pickle=True)
+    resolution =  map_dict.item().get('map_resolution')
+    origin_x = map_dict.item().get('map_origin_x')
+    origin_y = map_dict.item().get('map_origin_y')
+    map_original = map_dict.item().get('map_data')
     robot_raduis = 0.4
+    converter = CSpace(resolution, origin_x=origin_x, origin_y=origin_y, map_shape=map_original.shape )
+    
     converter = CSpace(resolution, origin_x=-4.73 , origin_y= -5.66,map_shape=map_original.shape )
-    map_original = np.array(np.load('maze_test.npy'), dtype=int)
     map_ = inflate(map_original, robot_raduis /resolution)
     start=converter.meter2pixel([0.0,0.0])
     goal = converter.meter2pixel([6.22, -4.22])

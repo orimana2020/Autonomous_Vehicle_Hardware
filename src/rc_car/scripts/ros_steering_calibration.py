@@ -3,8 +3,17 @@
 import rclpy
 from rclpy.node import Node
 import numpy as np
+from geometry_msgs.msg import PoseStamped
+from geometry_msgs.msg import  TransformStamped
+from py_PurePursuit import PurePersuit_Controller
+from py_Utils import euler_from_quaternion, Trajectory, State
 from geometry_msgs.msg import Twist
-import py_car_consts as car_consts
+from tf2_ros.buffer import Buffer
+from tf2_ros import TransformException
+from tf2_ros.transform_listener import TransformListener
+from rclpy.parameter import Parameter
+from nav_msgs.msg import Path
+from visualization_msgs.msg import Marker
 
 
 class PathTracking(Node):
@@ -15,7 +24,7 @@ class PathTracking(Node):
         Lfc = 0.8  # [m] look-ahead distance
         Kp = 1.0  # speed proportional gain
         self.TargetSpeed = 1.0  # [m/s]
-        self.MAX_STEER = car_consts.max_steering_angle_rad  # maximum steering angle [rad]
+        self.MAX_STEER = np.deg2rad(35.0)  # maximum steering angle [rad]
         MAX_DSTEER = np.deg2rad(150.0)  # maximum steering speed [rad/s]
         self.MAX_SPEED = 2.0 # maximum speed [m/s]
         self.MIN_SPEED = 1.0  # minimum speed [m/s]

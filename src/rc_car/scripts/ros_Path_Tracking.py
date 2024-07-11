@@ -66,11 +66,11 @@ class PathTracking(Node):
         path = Path()
         path.header.frame_id = 'map'
         poses = []
-        for coords in range(len(self.path)):
+        for i in range(len(self.trajectory.cx)):
             pose = PoseStamped()
             pose.header.frame_id = 'map'
-            pose.pose.position.x = self.path[coords][0]
-            pose.pose.position.y = self.path[coords][1]
+            pose.pose.position.x = self.trajectory.cx[i]
+            pose.pose.position.y = self.trajectory.cy[i]
             pose.pose.position.z = 0.0
             pose.pose.orientation.x = 0.0
             pose.pose.orientation.y = 0.0
@@ -97,6 +97,7 @@ class PathTracking(Node):
         if self.target_ind < self.lastIndex :
             # self.state.v = self.pp.proportional_control_acceleration(self.TargetSpeed)
             delta, self.target_ind, self.tx, self.ty = self.pp.pure_pursuit_steer_control(self.state, self.trajectory, self.target_ind, delta_t)
+            print(self.target_ind)
             self.state.predelta = delta
             linear_velocity = self.get_linear_velocity(steering_angle=delta)
             # print(f'streering_angle : {np.rad2deg(delta)}, rear_wheel_speed: {linear_velocity / self.wheel_radius}')
@@ -153,7 +154,6 @@ class PathTracking(Node):
         self.marker.pose.position.y = self.ty
         self.marker_pulisher.publish(self.marker)
 
-        
 
 def main(args=None):
     rclpy.init(args=args)
