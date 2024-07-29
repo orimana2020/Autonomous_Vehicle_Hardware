@@ -8,7 +8,7 @@ import time
 class PRM(object):
     def __init__(self, env_map,  max_itr=1200, dist=20 ):
         self.max_itr = max_itr
-        self.map = inflate(env_map, 7)
+        self.map = inflate(env_map, 5)
         self.env_rows, self.env_cols = env_map.shape #rows~y, cols~x
         self.max_dist=dist
         self.build_prm_graph()
@@ -144,7 +144,7 @@ def preprocessmap(map_):
 
 def main():
     start_time = time.time()
-    map_dict = np.load('mlrlab'+'.npy', allow_pickle=True)
+    map_dict = np.load('lab307'+'.npy', allow_pickle=True)
     resolution =  map_dict.item().get('map_resolution')
     origin_x = map_dict.item().get('map_origin_x')
     origin_y = map_dict.item().get('map_origin_y')

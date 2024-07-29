@@ -4,33 +4,33 @@ from py_Utils import Trajectory, CSpace, inflate
 
 
 # path = np.load('path3_meter.npy')
-path =  [
-[67,29],
+path = [
+
+[69,30],
 [106,27],
 [145, 26],
 [146,48],
 [130,70],
 [84,70],
-[44, 67],
-[42,28],
+[53, 67],
+[53,30],
 ]
 
-
-loops = 1
-looped_path = []
-i = [0,-1,1]
-for idx in range(loops):
-    for coords in path:
-        looped_path.append([coords[0], coords[1]+i[idx%3]])
+if path is not None:
+    loops = 5
+    looped_path = []
+    for idx in range(loops):
+        for coords in path:
+            looped_path.append([coords[0], coords[1]])
 # np.save('path33_meter', np.array(looped_path))
 # print(len(path))
 # print(len(looped_path))
-map_dict = np.load('mlrlab'+'.npy', allow_pickle=True)
+map_dict = np.load('lab307'+'.npy', allow_pickle=True)
 resolution =  map_dict.item().get('map_resolution')
 origin_x = map_dict.item().get('map_origin_x')
 origin_y = map_dict.item().get('map_origin_y')
 map_original = map_dict.item().get('map_data')
-map_original = inflate(map_original, 7)
+map_original = inflate(map_original, 5)
 
 
 class Plotter():
@@ -63,14 +63,17 @@ class Plotter():
 
 
 
-converter = CSpace(resolution, origin_x=origin_x, origin_y=origin_y, map_shape=map_original.shape )
-path_meter = converter.pathindex2pathmeter(looped_path)
-np.save('pathlab1_meter', path_meter)
-trajectory = Trajectory(dl=0.5, path=path_meter, TARGET_SPEED=0.9)
-print(len(trajectory.cx))
 plotter = Plotter(map_original)
-plotter.draw_graph(path = looped_path)
-
+if path is not None:
+    converter = CSpace(resolution, origin_x=origin_x, origin_y=origin_y, map_shape=map_original.shape )
+    print(converter.meter2pixel([0,0]))
+    looped_path_meter = converter.pathindex2pathmeter(looped_path)
+    np.save('path_lab307_meter', looped_path_meter)
+    trajectory = Trajectory(dl=0.2, path=looped_path_meter, TARGET_SPEED=0.9)
+    print(len(trajectory.cx))
+    plotter.draw_graph(path = looped_path)
+else:
+    plotter.draw_graph()
 
 
 
