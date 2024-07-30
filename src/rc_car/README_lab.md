@@ -2,6 +2,13 @@
 * CRITICAL*
 after installtion update TIME and DATE before sudo apt update and upgrade
 
+
+ssh robot1@192.168.0.102
+cd car_hardware
+source /opt/ros/humble/setup.bash
+source install/setup.bash
+
+
 # building:
 echo "source /opt/ros/humble/setup.bash" >> ~/.bashrc
 source /opt/ros/humble/setup.bash
@@ -38,7 +45,7 @@ ros2 launch rc_car online_async_launch.py use_sim_time:=false
 to store map as numpy array:
 restart
 run with localization and to save the map:
-ros2 run rc_car ros_Get_map_client.py --ros-args -p map_name:=lab307
+ros2 run rc_car ros_Get_map_client.py --ros-args -p map_name:=lab_g1
 
 
 localiztion:
@@ -61,14 +68,6 @@ ros2 run rc_car ros_Path_Tracking.py --ros-args -p use_sime_time:=false -p show_
 
 
 # ---------- General Notes ---------------------
-
-REAL ROBOT NOTES
-download imager to burn OS to PI
-download ubuntu mate for PI 64 from https://ubuntu-mate.org/download/
-install ros:https://docs.ros.org/en/humble/Installation/Ubuntu-Install-Debians.html
-        -> skip: set locale
-        -> setup sources
-        -> install ros2 packages , desktop version
 
 
 

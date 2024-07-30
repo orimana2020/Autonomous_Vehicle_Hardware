@@ -144,7 +144,7 @@ def preprocessmap(map_):
 
 def main():
     start_time = time.time()
-    map_dict = np.load('lab307'+'.npy', allow_pickle=True)
+    map_dict = np.load('lab_g1'+'.npy', allow_pickle=True)
     resolution =  map_dict.item().get('map_resolution')
     origin_x = map_dict.item().get('map_origin_x')
     origin_y = map_dict.item().get('map_origin_y')

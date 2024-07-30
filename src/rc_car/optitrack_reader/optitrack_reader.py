@@ -6,8 +6,8 @@ from py_Utils import Trajectory
 
 def convert_meter2mm(trajectory: Trajectory):
     for i in range(len(trajectory_meter.cx)):
-        trajectory.cx[i] = trajectory.cx[i] * 1000
-        trajectory.cy[i] = trajectory.cy[i] * 1000
+        trajectory.cx[i] = trajectory.cx[i] 
+        trajectory.cy[i] = trajectory.cy[i] 
     return trajectory
 
 def fix_coords(map_name, trajectory_mm):
@@ -26,11 +26,11 @@ def fix_coords(map_name, trajectory_mm):
 
 # frame, time, rotx, roty, rotz, rotw, rb_x, rgb_y, rb_z
 optitrack_data = []
-with open('car2_optitrack.csv') as csv_file:
+with open('lab_g1_record.csv') as csv_file:
     csv_reader = csv.reader(csv_file, delimiter=',')
     line_count = 0
     for row in csv_reader:
-        if 5000>line_count >= 7:
+        if 7000>line_count >= 7:
             frame, time, rotx, roty, rotz, rotw, rb_x, rgb_y, rb_z = row[:9]
             optitrack_data.append([int(frame), float(time), float(rotx), float(roty), float(rotz), float(rotw), float(rb_x), float(rgb_y), float(rb_z)])
         line_count +=1 
@@ -43,12 +43,12 @@ optitrack_data = np.load('car_data.npy')
 
 fig = plt.figure()
 ax = fig.add_subplot()
-ax.scatter(optitrack_data[:,6]-50, -optitrack_data[:,8]+290, c='b')
+ax.scatter(optitrack_data[:,6], -optitrack_data[:,7], c='b')
 
-planned_path = np.load('pathlab_meter.npy')
+planned_path = np.load('path_lab_g1_meter.npy')
 trajectory_meter = Trajectory(dl=0.01, path=planned_path)
 trajectory_mm = convert_meter2mm(trajectory_meter)
-trajectory_mm = fix_coords('mlrlab', trajectory_mm)
+trajectory_mm = fix_coords('lab_g1', trajectory_mm)
 
 
 
