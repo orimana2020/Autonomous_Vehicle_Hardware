@@ -1,4 +1,0 @@
-srv/GetPath.idl
-srv/GetPath.srv
-srv/GetPath_Request.msg
-srv/GetPath_Response.msg

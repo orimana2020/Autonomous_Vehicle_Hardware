@@ -1,1 +1,0 @@
-Invoking command in '/home/ori/Autonomous_Vehicle_Hardware/build/mocap_msgs': CMAKE_PREFIX_PATH=/opt/ros/humble /usr/bin/cmake /home/ori/Autonomous_Vehicle_Hardware/src/mocap_msgs -DCMAKE_INSTALL_PREFIX=/home/ori/Autonomous_Vehicle_Hardware/install/mocap_msgs

@@ -1,1 +1,0 @@
-Invoking command in '/home/ori/Autonomous_Vehicle_Hardware/build/diffdrive_arduino': CMAKE_PREFIX_PATH=/opt/ros/humble /usr/bin/cmake /home/ori/Autonomous_Vehicle_Hardware/src/diffdrive_arduino -DCMAKE_INSTALL_PREFIX=/home/ori/Autonomous_Vehicle_Hardware/install/diffdrive_arduino

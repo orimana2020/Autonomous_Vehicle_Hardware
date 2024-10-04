@@ -1,2 +1,0 @@
-Invoking command in '/home/ori/Autonomous_Vehicle_Hardware/build/diffdrive_arduino': CMAKE_PREFIX_PATH=/opt/ros/humble /usr/bin/cmake --build /home/ori/Autonomous_Vehicle_Hardware/build/diffdrive_arduino -- -j20 -l20
-Invoked command in '/home/ori/Autonomous_Vehicle_Hardware/build/diffdrive_arduino' returned '2': CMAKE_PREFIX_PATH=/opt/ros/humble /usr/bin/cmake --build /home/ori/Autonomous_Vehicle_Hardware/build/diffdrive_arduino -- -j20 -l20

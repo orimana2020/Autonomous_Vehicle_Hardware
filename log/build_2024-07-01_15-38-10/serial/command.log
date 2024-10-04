@@ -1,3 +1,0 @@
-Invoking command in '/home/ori/Autonomous_Vehicle_Hardware/build/serial': CMAKE_PREFIX_PATH=/opt/ros/humble /usr/bin/cmake /home/ori/Autonomous_Vehicle_Hardware/src/serial -DCMAKE_INSTALL_PREFIX=/home/ori/Autonomous_Vehicle_Hardware/install/serial
-Invoked command in '/home/ori/Autonomous_Vehicle_Hardware/build/serial' returned '0': CMAKE_PREFIX_PATH=/opt/ros/humble /usr/bin/cmake /home/ori/Autonomous_Vehicle_Hardware/src/serial -DCMAKE_INSTALL_PREFIX=/home/ori/Autonomous_Vehicle_Hardware/install/serial
-Invoking command in '/home/ori/Autonomous_Vehicle_Hardware/build/serial': CMAKE_PREFIX_PATH=/opt/ros/humble /usr/bin/cmake --build /home/ori/Autonomous_Vehicle_Hardware/build/serial -- -j20 -l20
