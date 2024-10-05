@@ -178,5 +178,5 @@ ros2 run teleop_twist_keyboard --ros-args -r /cmd_vel:=/diff_cont/cmd_vel_unstam
 [![Watch the video](https://github.com/orimana2020/Autonomous_Vehicle_Hardware/blob/main/videos/Autonomous%20car%20lab%20.png)](https://github.com/orimana2020/Autonomous_Vehicle_Hardware/blob/main/videos/Autonomous%20car%20lab%20.mp4)
 
 
-# Performance - OptiTrack - Planned VS Executed path
+## Performance - OptiTrack - Planned VS Executed path
 [![Watch the video](https://github.com/orimana2020/Autonomous_Vehicle_Hardware/blob/main/videos/optitrack_vs_planned.png)]
