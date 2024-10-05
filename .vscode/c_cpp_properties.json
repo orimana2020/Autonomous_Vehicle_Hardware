@@ -1,0 +1,32 @@
+{
+  "configurations": [
+    {
+      "browse": {
+        "databaseFilename": "${default}",
+        "limitSymbolsToIncludedHeaders": false
+      },
+      "includePath": [
+        "/home/ori/Autonomous_Vehicle_Hardware/install/serial/include/**",
+        "/home/ori/Autonomous_Vehicle_Hardware/install/mocap_msgs/include/**",
+        "/home/ori/Autonomous_Vehicle_Hardware/install/interfaces/include/**",
+        "/home/ori/Autonomous_Vehicle_Hardware/install/diffdrive_arduino/include/**",
+        "/home/ori/zed_ws/install/zed_topic_benchmark_component/include/**",
+        "/home/ori/zed_ws/install/zed_topic_benchmark_interfaces/include/**",
+        "/home/ori/zed_ws/install/zed_rgb_convert/include/**",
+        "/home/ori/zed_ws/install/zed_aruco_localization/include/**",
+        "/home/ori/zed_ws/install/zed_components/include/**",
+        "/home/ori/zed_ws/install/rviz_plugin_zed_od/include/**",
+        "/home/ori/zed_ws/install/zed_interfaces/include/**",
+        "/opt/ros/humble/include/**",
+        "/home/ori/Autonomous_Vehicle_Hardware/src/serial/include/**",
+        "/usr/include/**"
+      ],
+      "name": "ROS",
+      "intelliSenseMode": "gcc-x64",
+      "compilerPath": "/usr/bin/gcc",
+      "cStandard": "gnu11",
+      "cppStandard": "c++14"
+    }
+  ],
+  "version": 4
+}
