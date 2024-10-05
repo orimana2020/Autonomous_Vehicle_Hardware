@@ -149,6 +149,10 @@ ros2 run rc_car PathPlanning_service_prm.py --ros-args -p map_name:=map_world -p
 ```terminal
 ros2 run rc_car PathPlanning_client.py 0 0 6.22 -4.5 path1  --ros-args -p use_sime_time:=false
 ```
+
+### Optional: Smooth the path
+Use the script py_path_loops_generator.py 
+
 ### Terminal 7: Path tracking
 NOTE - the path_name without the '_meter'
 ```terminal
@@ -173,3 +177,6 @@ ros2 run teleop_twist_keyboard --ros-args -r /cmd_vel:=/diff_cont/cmd_vel_unstam
 # Video
 [![Watch the video](https://github.com/orimana2020/Autonomous_Vehicle_Hardware/blob/main/videos/Autonomous%20car%20lab%20.png)](https://github.com/orimana2020/Autonomous_Vehicle_Hardware/blob/main/videos/Autonomous%20car%20lab%20.mp4)
 
+
+# Performance - OptiTrack - Planned VS Executed path
+(https://github.com/orimana2020/Autonomous_Vehicle_Hardware/blob/main/videos/Autonomous%20car%20lab%20.png)
