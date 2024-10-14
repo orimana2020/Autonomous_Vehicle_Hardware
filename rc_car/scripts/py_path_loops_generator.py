@@ -3,40 +3,6 @@ import matplotlib.pyplot as plt
 from py_Utils import Trajectory, CSpace, inflate
 
 
-# path = np.load('path3_meter.npy')
-path = [
-# [69,30],
-# [106,27],
-# [145, 26],
-# [146,48],
-# [130,70],
-# [84,70],
-# [53, 67],
-# [53,30],
-[94,30], 
-[161,30],
-[160,50],
-[140,75],
-[80,70],
-[80,45]
-]
-
-if path is not None:
-    loops = 5
-    looped_path = []
-    for idx in range(loops):
-        for coords in path:
-            looped_path.append([coords[0], coords[1]])
-# np.save('path33_meter', np.array(looped_path))
-# print(len(path))
-# print(len(looped_path))
-map_dict = np.load('lab_demo'+'.npy', allow_pickle=True)
-resolution =  map_dict.item().get('map_resolution')
-origin_x = map_dict.item().get('map_origin_x')
-origin_y = map_dict.item().get('map_origin_y')
-map_original = map_dict.item().get('map_data')
-map_original = inflate(map_original, 3)
-
 
 class Plotter():
     def __init__(self, inflated_map): 
@@ -67,18 +33,39 @@ class Plotter():
 
 
 
-plotter = Plotter(map_original)
+map_dict = np.load('grant2_demo'+'.npy', allow_pickle=True)
+resolution =  map_dict.item().get('map_resolution')
+origin_x = map_dict.item().get('map_origin_x')
+origin_y = map_dict.item().get('map_origin_y')
+map_original = map_dict.item().get('map_data')
+# map_original = inflate(map_original, 3)
+
+
+path = np.load('path_ido_demo_meter.npy') 
 if path is not None:
-    converter = CSpace(resolution, origin_x=origin_x, origin_y=origin_y, map_shape=map_original.shape )
-    print(converter.meter2pixel([0,0]))
-    looped_path_meter = converter.pathindex2pathmeter(looped_path)
-    np.save('path_lab_demo_meter', looped_path_meter)
-    trajectory = Trajectory(dl=0.2, path=looped_path_meter, TARGET_SPEED=0.9)
-    print(len(trajectory.cx))
-    plotter.draw_graph(path = looped_path)
-else:
-    plotter.draw_graph()
+    loops = 5
+    looped_path = []
+    for idx in range(loops):
+        for coords in path:
+            looped_path.append([coords[0], coords[1]])
 
 
 
+
+
+trajectory = Trajectory(dl=0.2, path=looped_path, TARGET_SPEED=0.9)
+
+# plotter.draw_graph(path=looped_path, trajectory=trajectory)
+converter = CSpace(resolution, origin_x=origin_x, origin_y=origin_y, map_shape=map_original.shape)
+
+trajectory = Trajectory(dl=0.2, path=converter.pathmeter2pathindex(looped_path), TARGET_SPEED=0.9)
+for i in range(len(trajectory.cx)-1):
+    plt.plot([trajectory.cx[i],trajectory.cx[i+1]], [trajectory.cy[i],trajectory.cy[i+1]], color='r', linewidth=3)
+
+
+    
+plt.imshow(map_original, origin="lower")
+plt.pause(500)
+
+np.save('path_ido_demo_loops_meter', looped_path)
 

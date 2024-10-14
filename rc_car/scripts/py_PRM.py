@@ -6,10 +6,10 @@ import time
 
 
 class PRM(object):
-    def __init__(self, env_map,  max_itr=1200, dist=20 ):
+    def __init__(self,inflated_map,  max_itr=1200, dist=20 ):
         self.max_itr = max_itr
-        self.map = inflate(env_map, 5)
-        self.env_rows, self.env_cols = env_map.shape #rows~y, cols~x
+        self.map = inflated_map
+        self.env_rows, self.env_cols = inflated_map.shape #rows~y, cols~x
         self.max_dist=dist
         self.build_prm_graph()
 
@@ -66,12 +66,14 @@ class A_Star():
     def find_path(self, start, goal):
         start = (start[0], start[1])
         goal = (goal[0], goal[1])
+        """add start and goal to graph"""
         self.prm.graph[start] = self.prm.find_neighbors_in_range(start)
         for nei, dist in self.prm.graph[start]:
             self.prm.graph[nei].append((start, dist))
         self.prm.graph[goal] = self.prm.find_neighbors_in_range(goal)
         for nei, dist in self.prm.graph[goal]:
             self.prm.graph[nei].append((goal, dist))
+
         open_list = [(self.h(start, goal), start)]
         gscore = dict()
         came_from = dict()
@@ -95,6 +97,7 @@ class A_Star():
                         heapq.heappush(open_list, (gscore[neighbor]+self.h(neighbor, goal), neighbor) )
         print('No Path Found')
         return None, None
+
 
     def reconstruct_path(self, current, came_from, start):
         path = []
@@ -135,34 +138,53 @@ class Plotter():
         plt.imshow(self.map, origin="lower")
         plt.pause(100)
 
-def preprocessmap(map_):
-    map_[10:40, 55] = 100
+def add_wall(map_):
+    map_[10:50, 70] = 100
 
     return map_  
 
 
 
 def main():
-    start_time = time.time()
-    map_dict = np.load('lab_g2'+'.npy', allow_pickle=True)
+    map_dict = np.load('grant2_demo'+'.npy', allow_pickle=True)
     resolution =  map_dict.item().get('map_resolution')
     origin_x = map_dict.item().get('map_origin_x')
     origin_y = map_dict.item().get('map_origin_y')
     map_original = map_dict.item().get('map_data')
-    map_original = preprocessmap(map_original)
+    map_wall = add_wall(map_original.copy())
+    inflated_map = inflate(map_wall.copy(), 0.35/resolution)
     converter = CSpace(resolution, origin_x=origin_x, origin_y=origin_y, map_shape=map_original.shape )
-    prm = PRM(env_map=map_original,  max_itr=700, dist = 20)
+    prm = PRM(inflated_map,  max_itr=1200, dist = 20)
     astar = A_Star(prm)
-    start=converter.meter2pixel([0.0,0.0])
-    goal = converter.meter2pixel([-1, 0])
+
+
+    start=converter.meter2pixel([0.5,0])
+    goal = converter.meter2pixel([-0.7, 0.2])
+
     print(start)
     print(goal)
     path_index, cost = astar.find_path(start, goal)
-    if path_index is not None:
-        np.save('path3_meter', converter.pathindex2pathmeter(path_index))    
-    print(f'path cost: {cost}, time: {time.time()-start_time}')
-    plotter = Plotter(prm.map)
-    plotter.draw_graph(prm.graph, start, goal,path_index)
+    print(path_index)
+
+
+    ########3
+    # print(inflated_map[start[0]][start[1]])
+    # plotter = Plotter(inflated_map)
+    # plotter.draw_graph(prm.graph, start, goal)
+
+    #######
+    
+    trajectory = Trajectory(dl=0.2, path=path_index, TARGET_SPEED=0.9)
+    for i in range(len(trajectory.cx)-1):
+        plt.plot([trajectory.cx[i],trajectory.cx[i+1]], [trajectory.cy[i],trajectory.cy[i+1]], color='r', linewidth=3)
+   
+
+    plt.scatter(start[0], start[1])
+    plt.scatter(goal[0], goal[1])      
+    plt.imshow(map_original, origin="lower")
+    plt.pause(500)
+
+    # np.save('path_prm_grant2_meter', converter.pathindex2pathmeter(path_index))
 
 
 if __name__ == "__main__":

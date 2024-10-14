@@ -10,27 +10,27 @@ def convert_meter2mm(trajectory: Trajectory):
         trajectory.cy[i] = trajectory.cy[i] 
     return trajectory
 
-def fix_coords(map_name, trajectory_mm):
-    map_dict = np.load(map_name+'.npy', allow_pickle=True)
-    resolution =  map_dict.item().get('map_resolution')
-    origin_x = map_dict.item().get('map_origin_x') 
-    print(origin_x)  
-    origin_y = map_dict.item().get('map_origin_y')
-    print(origin_y)
-    map_ = map_dict.item().get('map_data')
-    for i in range(len(trajectory_mm.cx)):
-        trajectory_mm.cx[i] = trajectory_mm.cx[i]# - origin_x * 1000
-        trajectory_mm.cy[i] = trajectory_mm.cy[i] #- origin_y * 1000
-    return trajectory_mm
+# def fix_coords(map_name, trajectory_mm):
+#     map_dict = np.load(map_name+'.npy', allow_pickle=True)
+#     resolution =  map_dict.item().get('map_resolution')
+#     origin_x = map_dict.item().get('map_origin_x') 
+#     print(origin_x)  
+#     origin_y = map_dict.item().get('map_origin_y')
+#     print(origin_y)
+#     map_ = map_dict.item().get('map_data')
+#     for i in range(len(trajectory_mm.cx)):
+#         trajectory_mm.cx[i] = trajectory_mm.cx[i]# - origin_x * 1000
+#         trajectory_mm.cy[i] = trajectory_mm.cy[i] #- origin_y * 1000
+#     return trajectory_mm
 
 
 # frame, time, rotx, roty, rotz, rotw, rb_x, rgb_y, rb_z
 optitrack_data = []
-with open('lab_demo.csv') as csv_file:
+with open('ido_path1.csv') as csv_file:
     csv_reader = csv.reader(csv_file, delimiter=',')
     line_count = 0
     for row in csv_reader:
-        if 7000>line_count >= 7:
+        if line_count >= 7:
             frame, time, rotx, roty, rotz, rotw, rb_x, rgb_y, rb_z = row[:9]
             optitrack_data.append([int(frame), float(time), float(rotx), float(roty), float(rotz), float(rotw), float(rb_x), float(rgb_y), float(rb_z)])
         line_count +=1 
@@ -44,17 +44,17 @@ optitrack_data = np.load('car_data.npy')
 fig = plt.figure()
 ax = fig.add_subplot()
 ax.scatter(optitrack_data[:,6], -optitrack_data[:,7], c='b')
-
-planned_path = np.load('path_lab_demo_meter.npy')
-trajectory_meter = Trajectory(dl=0.01, path=planned_path)
-trajectory_mm = convert_meter2mm(trajectory_meter)
-trajectory_mm = fix_coords('lab_g2', trajectory_mm)
-
+planned_path = np.load('path_ido_demo_meter.npy')
+trajectory = Trajectory(dl=0.01, path=planned_path, TARGET_SPEED=0.9)
+# trajectory_mm = convert_meter2mm(trajectory_meter)
+# trajectory_mm = fix_coords('grant2_demo', trajectory_meter)
 
 
-ax.scatter(trajectory_mm.cx, trajectory_mm.cy, c='r')
-plt.axis('equal')
+
+ax.scatter(trajectory.cx, trajectory.cy, c='r')
 ax.set_xlabel('x [meter]')
 ax.set_ylabel('y [meter]')
 ax.legend(['OptiTrack', 'Planned Trajectory'])
+ax.set_aspect('equal')
+
 plt.show()

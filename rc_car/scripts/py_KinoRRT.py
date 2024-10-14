@@ -1,6 +1,6 @@
 import numpy as np
 import matplotlib.pyplot as plt
-from py_Utils import Tree,  CSpace
+from py_Utils import Tree,  CSpace, Trajectory
 plt.ion()
 
 class KINORRT(object):
@@ -134,8 +134,8 @@ def inflate(map_, inflation):#, resolution, distance):
 
 class Odom(object):
     def __init__(self, converter:CSpace):
-        self.wheelbase = 0.35
-        self.max_steering_angle = np.deg2rad(35)
+        self.wheelbase = 0.335
+        self.max_steering_angle = np.deg2rad(27)
         self.min_velocity, self.max_velocity = 0.5, 1
         self.min_time, self.max_time = 0.5, 1
         self.converter = converter
@@ -168,30 +168,48 @@ class Odom(object):
         return new_state, edge, cost
 
 
-def preprocessmap(map_):
-    map_[10:40, 60] = 100
-
+def add_wall(map_):
+    map_[10:50, 70] = 100
     return map_  
 
 def main():
-    map_dict = np.load('mlrlab'+'.npy', allow_pickle=True)
+    map_dict = np.load('grant2_demo'+'.npy', allow_pickle=True)
     resolution =  map_dict.item().get('map_resolution')
     origin_x = map_dict.item().get('map_origin_x')
     origin_y = map_dict.item().get('map_origin_y')
     map_original = map_dict.item().get('map_data')
-    map_original = preprocessmap(map_original)
-    inflated_map = inflate(map_original, 0.2/resolution)
+    map_wall = add_wall(map_original.copy())
+    inflated_map = inflate(map_wall, 0.35/resolution)
     converter = CSpace(resolution, origin_x=origin_x, origin_y=origin_y, map_shape=map_original.shape)
     start=converter.meter2pixel([0.0,0.0])
     # goal = converter.meter2pixel([-2, 0])
-    goal = converter.meter2pixel([6.22, -4.22])
+    goal = converter.meter2pixel([-0.7, 0])
     print(start)
     print(goal)
     kinorrt_planner = KINORRT(env_map=inflated_map, max_step_size=20, max_itr=10000, p_bias=0.05,converter=converter )
     path, path_idx, cost = kinorrt_planner.find_path(start, goal)
-    print(f'cost: {cost}')
+    # print(f'cost: {cost}')
     plotter = Plotter(inflated_map=inflated_map)
-    plotter.draw_tree(kinorrt_planner.tree, start, goal, path, path_idx)
+    # plotter.draw_tree(kinorrt_planner.tree, start, goal, path, path_idx)
+    
+    
+    # for i in range(len(path)-1):
+    #     plt.scatter(path[i][0], path[i][1], c='red')
+    
+    trajectory = Trajectory(dl=0.2, path=path, TARGET_SPEED=0.9)
+
+    
+
+    for i in range(len(trajectory.cx)-1):
+        plt.plot([trajectory.cx[i],trajectory.cx[i+1]], [trajectory.cy[i],trajectory.cy[i+1]], color='r', linewidth=3)
+   
+
+    plt.scatter(start[0], start[1])
+    plt.scatter(goal[0], goal[1])      
+    plt.imshow(map_original, origin="lower")
+    plt.pause(500)
+
+    np.save('path_kinorrt_grant2_meter', converter.pathindex2pathmeter(path))
     
 
 
