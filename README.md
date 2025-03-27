@@ -18,6 +18,11 @@ download imager to burn OS to PI
 download ubuntu mate for PI 64 from https://ubuntu-mate.org/download/
 install ros:https://docs.ros.org/en/humble/Installation/Ubuntu-Install-Debians.html
 
+
+colcon build --packages-select px4_msgs 
+colcon build --packages-select autonomous_msgs 
+colcon build --packages-select px4_ros_com path_planner trajectory_generator
+
 skip: set locale        
 setup sources   
 install ros2 packages , desktop version         
@@ -92,14 +97,14 @@ sudo chmod 666 /dev/ttyACM0
 ## Build
 ```terminal
 source /opt/ros/humble/setup.bash       
-colocon build --symlink-install 
+colcon build 
 source install/setup.bash       
 ```
 
 # Run
 Access the robot via SSH, make sure to source:          
 ```terminal
-ssh robot1@192.168.0.102
+ssh robot1@192.168.77.6
 cd car_hardware
 source /opt/ros/humble/setup.bash
 source install/setup.bash
