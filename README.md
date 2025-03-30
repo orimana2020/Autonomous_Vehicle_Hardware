@@ -18,11 +18,6 @@ download imager to burn OS to PI
 download ubuntu mate for PI 64 from https://ubuntu-mate.org/download/
 install ros:https://docs.ros.org/en/humble/Installation/Ubuntu-Install-Debians.html
 
-
-colcon build --packages-select px4_msgs 
-colcon build --packages-select autonomous_msgs 
-colcon build --packages-select px4_ros_com path_planner trajectory_generator
-
 skip: set locale        
 setup sources   
 install ros2 packages , desktop version         

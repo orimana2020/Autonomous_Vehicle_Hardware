@@ -616,7 +616,7 @@ class Ackermann_ARC(object):
 
 def inflate( map_, inflation):#, resolution, distance):
         cells_as_obstacle = int(inflation) #int(distance/resolution)
-        map_[95:130, 70] = 100
+        # map_[95:130, 70] = 100
         original_map = map_.copy()
         inflated_map = map_.copy()
         # add berrier
