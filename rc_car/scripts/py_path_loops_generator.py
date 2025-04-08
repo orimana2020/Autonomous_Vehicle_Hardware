@@ -29,13 +29,13 @@ class Plotter():
             plt.scatter(start[0], start[1], s=100, c='g')
             plt.scatter(goal[0],goal[1], s=100, c='r')
         plt.imshow(self.map, origin="lower")
-        plt.pause(50)
+        plt.pause(250)
     
 
 
 
 
-map_dict = np.load('new_lab'+'.npy', allow_pickle=True)
+map_dict = np.load('demoe'+'.npy', allow_pickle=True)
 resolution =  map_dict.item().get('map_resolution')
 origin_x = map_dict.item().get('map_origin_x')
 origin_y = map_dict.item().get('map_origin_y')
@@ -44,7 +44,8 @@ inflated_map = inflate(map_original, 3)
 
 
 
-path_manual_index = [[160,104],[180,140], [162,173],[186,214],[167,255],[99,256],[32,262],[38,196],[63,136], [138,107]]
+path_manual_index = [[88,114],[186,112], [166,170], [185, 230], [160,250],[102,252],[44,250],[42,190],[50,130]]
+
 converter = CSpace(resolution, origin_x=origin_x, origin_y=origin_y, map_shape=map_original.shape)
 path_manual_meter = converter.pathindex2pathmeter(path_manual_index)
 trajectory = Trajectory(dl=0.2, path=path_manual_meter, TARGET_SPEED=0.9)
@@ -59,16 +60,21 @@ if path_manual_meter is not None:
             looped_path.append([coords[0], coords[1]])
 
 
-PLOT_SINGLE_LOOP_PATH = False
-if PLOT_SINGLE_LOOP_PATH:
+PLOT_SINGLE_LOOP_PATH = 2
+if PLOT_SINGLE_LOOP_PATH==0:
+    plotter = Plotter(inflated_map)
+    plotter.draw_graph()
+
+
+elif PLOT_SINGLE_LOOP_PATH==1:
     plotter = Plotter(inflated_map)
     plotter.draw_graph(path=path_manual_index)
 
-else:
+elif PLOT_SINGLE_LOOP_PATH==2:
     trajectory = Trajectory(dl=0.2, path=converter.pathmeter2pathindex(looped_path), TARGET_SPEED=0.9)
     for i in range(len(trajectory.cx)-1):
         plt.plot([trajectory.cx[i],trajectory.cx[i+1]], [trajectory.cy[i],trajectory.cy[i+1]], color='r', linewidth=3)
-    np.save('new_lab_loops_meter', looped_path)
+    np.save('demoe_path_meter', looped_path)
     plt.imshow(map_original, origin="lower")
     plt.pause(50)
     

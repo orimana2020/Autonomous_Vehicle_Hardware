@@ -100,6 +100,7 @@ source install/setup.bash
 Access the robot via SSH, make sure to source:          
 ```terminal
 ssh robot1@192.168.77.6
+ssh robot1@192.168.0.102
 cd car_hardware
 source /opt/ros/humble/setup.bash
 source install/setup.bash
@@ -133,7 +134,7 @@ After Mapping restart the the robot
 
 ### Terminal 4: Localization
 ```terminal
-ros2 launch rc_car localization.launch.py map:=new_lab.yaml use_sim_time:=false
+ros2 launch rc_car localization.launch.py map:=demoe.yaml use_sim_time:=false
 ```
 1. in rviz, manually write "map" in fixed frame
 2. change set initial position
@@ -156,7 +157,7 @@ Use the script py_path_loops_generator.py
 ### Terminal 7: Path tracking
 NOTE - the path_name without the '_meter'
 ```terminal
-ros2 run rc_car ros_Path_Tracking.py --ros-args -p use_sime_time:=false -p show_path:=true -p show_marker:=true -p path_name:=new_lab_loops
+ros2 run rc_car ros_Path_Tracking.py --ros-args -p use_sime_time:=false -p show_path:=true -p show_marker:=true -p path_name:=demoe_path
 ```
 
 
